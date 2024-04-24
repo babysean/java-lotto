@@ -1,4 +1,4 @@
-import java.util.logging.Logger;
+package stringCalculator;
 
 public class Calculator {
 
