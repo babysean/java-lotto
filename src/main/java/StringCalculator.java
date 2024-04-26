@@ -15,7 +15,7 @@ public class StringCalculator {
      * */
     private String[] splitNumber(String stringNumber) {
         if (!stringNumber.startsWith("//")) {
-            throw new RuntimeException("Invalid format: 구분자 형식이 맞지 않습니다.");
+            throw new IllegalArgumentException("Invalid format: 구분자 형식이 맞지 않습니다.");
         }
 
         int delimiterEndIndex = stringNumber.indexOf('\n');
@@ -35,10 +35,10 @@ public class StringCalculator {
             try {
                 int num = Integer.parseInt(number);
                 if (num < 0) {
-                    throw new NumberFormatException("Invalid format: 음수가 포함 되어있습니다.");
+                    throw new IllegalArgumentException("Invalid format: 음수가 포함 되어있습니다.");
                 }
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Invalid format: 형식이 맞지 않습니다.");
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid format: 형식이 맞지 않습니다.");
             }
         });
     }
