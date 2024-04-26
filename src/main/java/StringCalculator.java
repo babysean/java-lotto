@@ -11,7 +11,11 @@ public class StringCalculator {
         this.splitNumbers = splitNumbers();
     }
 
-    // 문자열을 명시된 구분자에 맞게 split 하여 변수에 저장합니다.
+    /**
+     * 문자열을 명시된 구분자에 맞게 split 하여 변수에 저장합니다.
+     *
+     * @author 박상훈
+     * */
     private String[] splitNumbers() {
         if (!stringNumbers.startsWith("//")) {
             throw new RuntimeException("Invalid format: 구분자 형식이 맞지 않습니다.");
@@ -24,7 +28,11 @@ public class StringCalculator {
         return customStringNumbers.split(customDelimiter);
     }
 
-    // 문자열에 음수가 포함되어 있는지, 형식이 맞는지 확인합니다.
+    /**
+     * 문자열에 음수가 포함되어 있는지, 형식이 맞는지 확인합니다.
+     *
+     * @author 박상훈
+     * */
     private void checkFormat() {
         Arrays.stream(splitNumbers).forEach(number -> {
             try {
@@ -38,7 +46,11 @@ public class StringCalculator {
         });
     }
 
-    // split 된 문자 배열을 더합니다.
+    /**
+     * split 된 문자 배열을 더합니다.
+     *
+     * @author 박상훈
+     * */
     public int sum() {
         checkFormat();
 
