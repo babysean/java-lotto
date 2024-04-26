@@ -2,13 +2,10 @@ import java.util.Arrays;
 
 public class StringCalculator {
 
-    private final String stringNumbers;
+    private final String[] numbers;
 
-    private final String[] splitNumbers;
-
-    public StringCalculator(String stringNumbers) {
-        this.stringNumbers = stringNumbers;
-        this.splitNumbers = splitNumbers();
+    public StringCalculator(String stringNumber) {
+        this.numbers = splitNumber(stringNumber);
     }
 
     /**
@@ -16,14 +13,14 @@ public class StringCalculator {
      *
      * @author 박상훈
      * */
-    private String[] splitNumbers() {
-        if (!stringNumbers.startsWith("//")) {
+    private String[] splitNumber(String stringNumber) {
+        if (!stringNumber.startsWith("//")) {
             throw new RuntimeException("Invalid format: 구분자 형식이 맞지 않습니다.");
         }
 
-        int delimiterEndIndex = stringNumbers.indexOf('\n');
-        String customDelimiter = stringNumbers.substring(2, delimiterEndIndex);
-        String customStringNumbers = stringNumbers.substring(delimiterEndIndex + 1);
+        int delimiterEndIndex = stringNumber.indexOf('\n');
+        String customDelimiter = stringNumber.substring(2, delimiterEndIndex);
+        String customStringNumbers = stringNumber.substring(delimiterEndIndex + 1);
 
         return customStringNumbers.split(customDelimiter);
     }
@@ -34,7 +31,7 @@ public class StringCalculator {
      * @author 박상훈
      * */
     private void checkFormat() {
-        Arrays.stream(splitNumbers).forEach(number -> {
+        Arrays.stream(numbers).forEach(number -> {
             try {
                 int num = Integer.parseInt(number);
                 if (num < 0) {
@@ -54,7 +51,7 @@ public class StringCalculator {
     public int sum() {
         checkFormat();
 
-        return Arrays.stream(splitNumbers)
+        return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
