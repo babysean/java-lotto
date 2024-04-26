@@ -5,7 +5,20 @@ public class StringCalculator {
     private final String[] numbers;
 
     public StringCalculator(String stringNumber) {
+        checkNotNull(stringNumber);
+
         this.numbers = splitNumber(stringNumber);
+    }
+
+    /**
+     * 입력값이 null 이면 NullPointerException 을 반환합니다.
+     *
+     * @author 박상훈
+     */
+    private void checkNotNull(String stringNumber) {
+        if (stringNumber == null) {
+            throw new NullPointerException("입력값은 NULL일 수 없습니다.");
+        }
     }
 
     /**
