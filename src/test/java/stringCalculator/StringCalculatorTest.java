@@ -57,4 +57,16 @@ class StringCalculatorTest {
         assertThat(result).isEqualTo(15);
     }
 
+    @Test
+    @DisplayName("문자열에_숫자가_아닌_값이_포함되어_있는지_확인합니다")
+    void 문자열에_숫자가_아닌_값이_포함되어_있는지_확인합니다() {
+        // given
+        String[] numbers = {"123", "456", "789"};
+
+        // when
+        boolean withNonNumber = Arrays.stream(numbers).anyMatch(s -> !s.matches("\\d+"));
+
+        // then
+        assertThat(withNonNumber).isFalse();
+    }
 }
