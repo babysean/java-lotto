@@ -11,6 +11,9 @@ public class StringCalculator {
         checkDelimiterFormat(stringNumber);
 
         this.numbers = splitNumber(stringNumber);
+
+        checkInteger();
+        checkNegative();
     }
 
     /**
@@ -28,6 +31,8 @@ public class StringCalculator {
      * 문자열을 명시된 구분자에 맞게 split 하여 변수에 저장합니다.
      *
      * @author 박상훈
+     * @param stringNumber 구분자와 숫자가 포함된 문자열
+     * @return String[]
      * */
     private String[] splitNumber(String stringNumber) {
         // \n의 index 값 추출
@@ -44,6 +49,7 @@ public class StringCalculator {
      * 문자열이 // 로 시작하는지 확인합니다.
      *
      * @author 박상훈
+     * @param stringNumber 구분자와 숫자가 포함된 문자열
      * */
     private void checkDelimiterFormat(String stringNumber) {
         if (!stringNumber.startsWith("//")) {
@@ -56,12 +62,26 @@ public class StringCalculator {
      *
      * @author 박상훈
      * */
-    public void checkNegative() {
+    private void checkNegative() {
         boolean check = Arrays.stream(numbers)
                 .anyMatch(n -> Integer.parseInt(n) < 0);
 
-        if (!check) {
+        if (check) {
             throw new IllegalArgumentException("음수는 포함될 수 없습니다.");
+        }
+    }
+
+    /**
+     * split한 String 배열에 숫자가 아닌 값이 포함되어있는지 확인합니다.
+     *
+     * @author 박상훈
+     * */
+    public void checkInteger() {
+        boolean check = Arrays.stream(numbers)
+                .anyMatch(number -> !number.matches("\\d+"));
+
+        if (check) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
         }
     }
 
@@ -71,8 +91,6 @@ public class StringCalculator {
      * @author 박상훈
      * */
     public int sum() {
-        checkNegative();
-
         return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
