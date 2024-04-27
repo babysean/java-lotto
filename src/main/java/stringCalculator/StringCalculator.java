@@ -1,3 +1,5 @@
+package stringCalculator;
+
 import java.util.Arrays;
 
 public class StringCalculator {
