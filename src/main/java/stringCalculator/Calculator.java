@@ -1,8 +1,6 @@
 package stringCalculator;
 
 public class Calculator {
-
-
     public static void main(String[] args) {
         try {
             StringCalculator calculator = new StringCalculator("//::\n11::2::1");
