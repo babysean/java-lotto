@@ -4,47 +4,94 @@ import java.util.Arrays;
 
 public class StringCalculator {
 
-    private final String stringNumbers;
+    private final String[] numbers;
 
-    private final String[] splitNumbers;
+    public StringCalculator(String stringNumber) {
+        checkNotNull(stringNumber);
+        checkDelimiterFormat(stringNumber);
 
-    public StringCalculator(String stringNumbers) {
-        this.stringNumbers = stringNumbers;
-        this.splitNumbers = splitNumbers();
+        this.numbers = splitNumber(stringNumber);
+
+        checkInteger();
+        checkNegative();
     }
 
-    // 문자열을 명시된 구분자에 맞게 split 하여 변수에 저장합니다.
-    private String[] splitNumbers() {
-        if (!stringNumbers.startsWith("//")) {
-            throw new RuntimeException("Invalid format: 구분자 형식이 맞지 않습니다.");
+    /**
+     * 입력값이 null 이면 NullPointerException 을 반환합니다.
+     *
+     * @author 박상훈
+     */
+    private void checkNotNull(String stringNumber) {
+        if (stringNumber == null) {
+            throw new NullPointerException("입력값은 NULL일 수 없습니다.");
         }
+    }
 
-        int delimiterEndIndex = stringNumbers.indexOf('\n');
-        String customDelimiter = stringNumbers.substring(2, delimiterEndIndex);
-        String customStringNumbers = stringNumbers.substring(delimiterEndIndex + 1);
+    /**
+     * 문자열을 명시된 구분자에 맞게 split 하여 변수에 저장합니다.
+     *
+     * @author 박상훈
+     * @param stringNumber 구분자와 숫자가 포함된 문자열
+     * @return String[]
+     * */
+    private String[] splitNumber(String stringNumber) {
+        // \n의 index 값 추출
+        int delimiterEndIndex = stringNumber.indexOf('\n');
+        // // 부터 \n 사이의 문자열을 추출 = 구분자 추출
+        String customDelimiter = stringNumber.substring(2, delimiterEndIndex);
+        // \n 다음번의 문자열부터 자르기 = 숫자를 추출할 문자열
+        String customStringNumbers = stringNumber.substring(delimiterEndIndex + 1);
 
         return customStringNumbers.split(customDelimiter);
     }
 
-    // 문자열에 음수가 포함되어 있는지, 형식이 맞는지 확인합니다.
-    private void checkFormat() {
-        Arrays.stream(splitNumbers).forEach(number -> {
-            try {
-                int num = Integer.parseInt(number);
-                if (num < 0) {
-                    throw new NumberFormatException("Invalid format: 음수가 포함 되어있습니다.");
-                }
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Invalid format: 형식이 맞지 않습니다.");
-            }
-        });
+    /**
+     * 문자열이 // 로 시작하는지 확인합니다.
+     *
+     * @author 박상훈
+     * @param stringNumber 구분자와 숫자가 포함된 문자열
+     * */
+    private void checkDelimiterFormat(String stringNumber) {
+        if (!stringNumber.startsWith("//")) {
+            throw new IllegalArgumentException("구분자 형식이 맞지 않습니다.");
+        }
     }
 
-    // split 된 문자 배열을 더합니다.
-    public int sum() {
-        checkFormat();
+    /**
+     * 문자열에 음수가 포함되어 있는지 확인합니다.
+     *
+     * @author 박상훈
+     * */
+    private void checkNegative() {
+        boolean check = Arrays.stream(numbers)
+                .anyMatch(n -> Integer.parseInt(n) < 0);
 
-        return Arrays.stream(splitNumbers)
+        if (check) {
+            throw new IllegalArgumentException("음수는 포함될 수 없습니다.");
+        }
+    }
+
+    /**
+     * split한 String 배열에 숫자가 아닌 값이 포함되어있는지 확인합니다.
+     *
+     * @author 박상훈
+     * */
+    public void checkInteger() {
+        boolean check = Arrays.stream(numbers)
+                .anyMatch(number -> !number.matches("\\d+"));
+
+        if (check) {
+            throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다.");
+        }
+    }
+
+    /**
+     * split 된 문자 배열을 더합니다.
+     *
+     * @author 박상훈
+     * */
+    public int sum() {
+        return Arrays.stream(numbers)
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
