@@ -37,7 +37,7 @@ public class InputView {
      * @author 박상훈
      * @return List
      * */
-    public List insertLastWeekWinningNumber() {
+    public List<Integer> insertLastWeekWinningNumber() {
         String scanValue;
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
@@ -51,7 +51,7 @@ public class InputView {
         // 유효성 체크
         validate(lastWeekWinningNumber);
 
-        return Arrays.stream(lastWeekWinningNumber).collect(Collectors.toList());
+        return Arrays.stream(lastWeekWinningNumber).map(Integer::parseInt).collect(Collectors.toList());
     }
 
     /**
