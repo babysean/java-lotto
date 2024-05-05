@@ -42,7 +42,7 @@ class LottoTest {
 
         // then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> inputView.insertMoney())
+                .isThrownBy(inputView::insertMoney)
                 .withMessage("숫자만 입력할 수 있습니다.");
     }
 
@@ -58,7 +58,7 @@ class LottoTest {
 
         // then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> inputView.insertLastWeekWinningNumber())
+                .isThrownBy(inputView::insertLastWeekWinningNumber)
                 .withMessage("당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.");
     }
 
@@ -74,7 +74,7 @@ class LottoTest {
 
         // then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> inputView.insertLastWeekWinningNumber())
+                .isThrownBy(inputView::insertLastWeekWinningNumber)
                 .withMessage("각 당첨번호는 1과 45 사이의 정수이어야 합니다.");
     }
 
@@ -90,7 +90,7 @@ class LottoTest {
 
         // then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> inputView.insertLastWeekWinningNumber())
+                .isThrownBy(inputView::insertLastWeekWinningNumber)
                 .withMessage("당첨번호에 중복된 숫자가 없어야 합니다.");
     }
 
@@ -164,5 +164,19 @@ class LottoTest {
 
         // then
         assertThat(count).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("수익률을_계산하여_반환합니다")
+    void 수익률을_계산하여_반환합니다() {
+        // given
+        List<List<Integer>> lottoNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12));
+        List<Integer> lastWeeklottoNumbers = Arrays.asList(2, 3, 4, 13, 20, 21);
+
+        // when
+        LottoCalculator calculator = new LottoCalculator(lottoNumbers, lastWeeklottoNumbers, 2000);
+
+        // then
+        assertThat(calculator.getRateOfReturn()).isEqualTo(2.5);
     }
 }
