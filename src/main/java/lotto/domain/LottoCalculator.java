@@ -4,10 +4,10 @@ import java.util.*;
 
 public class LottoCalculator {
     /** 맞춘 개수 */
-    private List<Integer> winningCounts = new ArrayList<>();
+    private final List<Integer> winningCounts;
 
     /** 로또 구매 금액 */
-    private int purchaseMoney;
+    private final int purchaseMoney;
 
     /**
      * 맞춘 로또의 개수를 구합니다.
@@ -19,11 +19,15 @@ public class LottoCalculator {
      */
     public LottoCalculator(List<List<Integer>> purchasedNumbers, List<Integer> winningNumbers, int purchaseMoney) {
         this.purchaseMoney = purchaseMoney;
+        this.winningCounts = new ArrayList<>();
+
+        Set<Integer> winningNumber = new HashSet<>(winningNumbers);
 
         for (List<Integer> purchase : purchasedNumbers) {
             Set<Integer> intersection = new HashSet<>(purchase);
 
-            intersection.retainAll(winningNumbers);
+            // 비교하여 같은 숫자만 남깁니다.
+            intersection.retainAll(winningNumber);
 
             winningCounts.add(intersection.size());
         }
@@ -57,6 +61,6 @@ public class LottoCalculator {
 
         double rateOfReturn = (double) winningPrice / (double) this.purchaseMoney;
 
-        return Math.round(rateOfReturn * 100) / 100.0;
+        return Math.floor(rateOfReturn * 1000) / 1000;
     }
 }
