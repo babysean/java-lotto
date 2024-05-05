@@ -23,6 +23,10 @@ public class LottoNumberGenerator {
 
         Collections.shuffle(numbers);
 
-        return numbers.subList(0, 6);
+        List<Integer> shuffledNumber = numbers.subList(0, 6);
+
+        Collections.sort(shuffledNumber);
+
+        return shuffledNumber;
     }
 }
