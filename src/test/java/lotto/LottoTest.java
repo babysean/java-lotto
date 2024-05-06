@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoCalculator;
 import lotto.domain.LottoNumberGenerator;
 import lotto.domain.LottoPurchase;
+import lotto.domain.PurchasedNumbers;
 import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -125,10 +126,11 @@ class LottoTest {
     @DisplayName("전달받은_금액으로_살_수_있는_로또의_개수를_반환합니다")
     void 전달받은_금액으로_살_수_있는_로또의_개수를_반환합니다() {
         // given
-        LottoPurchase lottoPurchase =  new LottoPurchase(2000);
+        LottoPurchase lottoPurchase =  new LottoPurchase(new PurchasedNumbers(), 2000);
 
         // when
-        List<List<Integer>> lottoNumbers = lottoPurchase.getPurchasedNumbers();
+        PurchasedNumbers purchasedNumbers = lottoPurchase.getPurchasedNumbers();
+        List<List<Integer>> lottoNumbers = purchasedNumbers.getNumbers();
 
         // then
         assertThat(lottoNumbers).hasSize(2);
@@ -139,15 +141,16 @@ class LottoTest {
     void 두_정수_리스트의_일치하는_정수의_개수를_반환합니다() {
         // given
         int purchaseMoney = 2000;
-        List<List<Integer>> lottoNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12));
+        PurchasedNumbers lottoNumbers = new PurchasedNumbers();
+        lottoNumbers.addNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumbers.addNumber(Arrays.asList(7, 8, 9, 10, 11, 12));
         List<Integer> lastWeeklottoNumbers = Arrays.asList(2, 3, 4, 5, 20, 21);
 
         // when
         LottoCalculator calculator = new LottoCalculator(lottoNumbers, lastWeeklottoNumbers, purchaseMoney);
-        Double rate = calculator.getRateOfReturn();
 
         // then
-        assertThat(Math.round(rate * 100) / 100.0).isEqualTo(25.0);
+        assertThat(calculator.getCountOfWins(4)).isEqualTo(1);
     }
 
     @Test
@@ -155,7 +158,9 @@ class LottoTest {
     void 정수_리스트에서_특정_숫자에_맞는_값의_개수를_반환합니다() {
         // given
         int purchaseMoney = 2000;
-        List<List<Integer>> lottoNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12));
+        PurchasedNumbers lottoNumbers = new PurchasedNumbers();
+        lottoNumbers.addNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumbers.addNumber(Arrays.asList(7, 8, 9, 10, 11, 12));
         List<Integer> lastWeeklottoNumbers = Arrays.asList(2, 3, 4, 5, 20, 21);
 
         // when
@@ -170,7 +175,9 @@ class LottoTest {
     @DisplayName("수익률을_계산하여_반환합니다")
     void 수익률을_계산하여_반환합니다() {
         // given
-        List<List<Integer>> lottoNumbers = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12));
+        PurchasedNumbers lottoNumbers = new PurchasedNumbers();
+        lottoNumbers.addNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumbers.addNumber(Arrays.asList(7, 8, 9, 10, 11, 12));
         List<Integer> lastWeeklottoNumbers = Arrays.asList(2, 3, 4, 13, 20, 21);
 
         // when

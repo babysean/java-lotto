@@ -17,13 +17,13 @@ public class LottoCalculator {
      * @param winningNumbers 지난 주 당첨 로또 번호
      * @param purchaseMoney 로또 구매 금액
      */
-    public LottoCalculator(List<List<Integer>> purchasedNumbers, List<Integer> winningNumbers, int purchaseMoney) {
+    public LottoCalculator(PurchasedNumbers purchasedNumbers, List<Integer> winningNumbers, int purchaseMoney) {
         this.purchaseMoney = purchaseMoney;
         this.winningCounts = new ArrayList<>();
 
         Set<Integer> winningNumber = new HashSet<>(winningNumbers);
 
-        for (List<Integer> purchase : purchasedNumbers) {
+        for (List<Integer> purchase : purchasedNumbers.getNumbers()) {
             Set<Integer> intersection = new HashSet<>(purchase);
 
             // 비교하여 같은 숫자만 남깁니다.

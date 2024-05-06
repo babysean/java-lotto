@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.domain.LottoCalculator;
 import lotto.domain.LottoPurchase;
+import lotto.domain.PurchasedNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,10 +22,12 @@ public class LottoService {
 
     private final InputView inputView;
     private final ResultView resultView;
+    private final PurchasedNumbers purchasedNumbers;
 
-    public LottoService(InputView inputView, ResultView resultView) {
+    public LottoService(InputView inputView, ResultView resultView, PurchasedNumbers purchasedNumbers) {
         this.inputView = inputView;
         this.resultView = resultView;
+        this.purchasedNumbers = purchasedNumbers;
     }
 
     public void run() {
@@ -33,8 +36,8 @@ public class LottoService {
             int purchaseMoney = inputView.insertMoney();
 
             // 로또 구매하기
-            LottoPurchase lottoPurchase = new LottoPurchase(purchaseMoney);
-            List<List<Integer>> purchasedNumbers = lottoPurchase.getPurchasedNumbers();
+            LottoPurchase lottoPurchase = new LottoPurchase(purchasedNumbers, purchaseMoney);
+            PurchasedNumbers purchasedNumbers = lottoPurchase.getPurchasedNumbers();
 
             // 구매한 개수 및 번호 출력
             resultView.printPurchaseInfo(purchasedNumbers);

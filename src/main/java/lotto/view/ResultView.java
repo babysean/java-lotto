@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoCalculator;
+import lotto.domain.PurchasedNumbers;
 
 import java.util.List;
 
@@ -12,10 +13,10 @@ public class ResultView {
      * @author 박상훈
      * @param lottoNumbers 로또 객체
      * */
-    public void printPurchaseInfo(List<List<Integer>> lottoNumbers) {
-        System.out.println(lottoNumbers.size() + "개를 구매했습니다.");
+    public void printPurchaseInfo(PurchasedNumbers lottoNumbers) {
+        System.out.println(lottoNumbers.getNumbers().size() + "개를 구매했습니다.");
 
-        for (List<Integer> lottoNumber : lottoNumbers) {
+        for (List<Integer> lottoNumber : lottoNumbers.getNumbers()) {
             System.out.println(lottoNumber);
         }
     }
