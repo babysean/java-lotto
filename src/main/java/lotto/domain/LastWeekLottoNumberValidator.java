@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static lotto.service.LottoService.*;
 import static lotto.service.LottoService.LOTTO_COUNT;
 
-public class Validator {
+public class LastWeekLottoNumberValidator {
     /**
      * 지난 주 당첨 번호에 대한 유효성을 확인 합니다.
      * <p>1. 번호가 6개 인지</p>
@@ -15,7 +15,7 @@ public class Validator {
      * @author 박상훈
      * @param number 지난 주 당첨 번호
      * */
-    public Validator(String[] number) {
+    public LastWeekLottoNumberValidator(String[] number) {
         if (!isSizeCorrect(number)) {
             throw new IllegalArgumentException("당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.");
         }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Validator;
+import lotto.domain.LastWeekLottoNumberValidator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -51,7 +51,7 @@ public class InputView {
                 .split(",");
 
         // 유효성 체크
-        new Validator(lastWeekWinningNumber);
+        new LastWeekLottoNumberValidator(lastWeekWinningNumber);
 
         return Arrays.stream(lastWeekWinningNumber).map(Integer::parseInt).collect(Collectors.toList());
     }
