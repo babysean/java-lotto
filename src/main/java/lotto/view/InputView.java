@@ -51,7 +51,8 @@ public class InputView {
                 .split(",");
 
         // 유효성 체크
-        new LastWeekLottoNumberValidator(lastWeekWinningNumber);
+        LastWeekLottoNumberValidator validator = new LastWeekLottoNumberValidator();
+        validator.validate(lastWeekWinningNumber);
 
         return Arrays.stream(lastWeekWinningNumber).map(Integer::parseInt).collect(Collectors.toList());
     }

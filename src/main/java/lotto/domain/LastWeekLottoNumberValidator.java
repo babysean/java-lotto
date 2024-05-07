@@ -15,7 +15,7 @@ public class LastWeekLottoNumberValidator {
      * @author 박상훈
      * @param number 지난 주 당첨 번호
      * */
-    public LastWeekLottoNumberValidator(String[] number) {
+    public void validate(String[] number) {
         if (!isSizeCorrect(number)) {
             throw new IllegalArgumentException("당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.");
         }
