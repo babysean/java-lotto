@@ -1,57 +1,68 @@
 package lotto.service;
 
+import lotto.domain.LastWeekLottoValidator;
 import lotto.domain.LottoCalculator;
-import lotto.domain.LottoPurchase;
-import lotto.domain.PurchasedNumbers;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.domain.LottoConsumer;
+import lotto.domain.LottoTicket;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
-    /** 로또 가격 */
-    public static final int LOTTO_PRICE = 1000;
+    // TODO: 도메인들의 로직을 구현한다. loose coupling !!!!
 
-    /** 로또 개수 */
-    public static final int LOTTO_COUNT = 6;
-
-    /** 로또 범위 */
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 45;
-
-    private final InputView inputView;
-    private final ResultView resultView;
-    private final PurchasedNumbers purchasedNumbers;
-
-    public LottoService(InputView inputView, ResultView resultView, PurchasedNumbers purchasedNumbers) {
-        this.inputView = inputView;
-        this.resultView = resultView;
-        this.purchasedNumbers = purchasedNumbers;
+    /**
+     * 로또 번호를 생성하고 목록을 반환 합니다.
+     *
+     * @param consumer LottoConsumer
+     * @param money 구매 금액
+     * */
+    public List<LottoTicket> buyLotto(LottoConsumer consumer, int money) {
+        return consumer.buyLotto(money);
     }
 
-    public void run() {
-        try {
-            // 구매할 금액 입력
-            int purchaseMoney = inputView.insertMoney();
+    /**
+     * 지난 주 당첨 로또를 가공하여 LottoTicket 으로 만듧니다.
+     *
+     * @param numbers 지난 주 당첨 번호
+     * @return LottoTicket
+     * */
+    public LottoTicket winningNumberToTicket(String[] numbers) {
+        // 유효성 체크
+        LastWeekLottoValidator validator = new LastWeekLottoValidator();
+        validator.validate(numbers);
 
-            // 로또 구매하기
-            LottoPurchase lottoPurchase = new LottoPurchase(purchasedNumbers, purchaseMoney);
-            PurchasedNumbers purchasedNumbers = lottoPurchase.getPurchasedNumbers();
+        List<Integer> numberList = Arrays.stream(numbers).map(Integer::parseInt).collect(Collectors.toList());
 
-            // 구매한 개수 및 번호 출력
-            resultView.printPurchaseInfo(purchasedNumbers);
-
-            // 지난 주 당첨 번호 입력
-            List<Integer> winningNumbers = inputView.insertLastWeekWinningNumber();
-
-            // 로또 계산
-            LottoCalculator lottoCalculator = new LottoCalculator(purchasedNumbers, winningNumbers, purchaseMoney);
-
-            // 로또 결과 출력
-            resultView.printResult(lottoCalculator);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return new LottoTicket(numberList);
     }
+
+    /**
+     * 로또를 계산하여 일치하는 개수의 목록을 반환합니다.
+     *
+     * @param lottoTickets 구매한 로또 티켓
+     * @param winningTicket 지난 주 당첨 로또 티켓
+     * @return List<Integer>
+     * */
+    public List<Integer> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
+        LottoCalculator calculator = new LottoCalculator(lottoTickets, winningTicket);
+
+        return calculator.calculate();
+    }
+
+    /**
+     * 전달받은 수 만큼 맞은 로또의 개수를 반환합니다.
+     *
+     * @param matchingCount 일치하는 숫자의 개수 목록
+     * @param checkNumber 확인할 개수
+     * @return int
+     * */
+    public int getCountOfWins(List<Integer> matchingCount, int checkNumber) {
+        return (int) matchingCount
+                .stream()
+                .filter(count -> count == checkNumber)
+                .count();
+    }
+
 }

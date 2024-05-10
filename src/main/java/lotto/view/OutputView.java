@@ -1,23 +1,22 @@
 package lotto.view;
 
 import lotto.domain.LottoCalculator;
-import lotto.domain.PurchasedNumbers;
+import lotto.domain.LottoTicket;
 
 import java.util.List;
 
-public class ResultView {
-
+public class OutputView {
     /**
      * 로또 구매 개수와 로또 번호를 출력합니다.
      *
      * @author 박상훈
-     * @param lottoNumbers 로또 객체
+     * @param lottoTickets 로또 객체
      * */
-    public void printPurchaseInfo(PurchasedNumbers lottoNumbers) {
-        System.out.println(lottoNumbers.getNumbers().size() + "개를 구매했습니다.");
+    public void printLottoTicketsInformation(List<LottoTicket> lottoTickets) {
+        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
 
-        for (List<Integer> lottoNumber : lottoNumbers.getNumbers()) {
-            System.out.println(lottoNumber);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            System.out.println(lottoTicket.get());
         }
     }
 
@@ -27,13 +26,15 @@ public class ResultView {
      * @author 박상훈
      * @param lotto 로또 객체
      * */
-    public void printResult(LottoCalculator lotto) {
+    public void printWinningInformation(LottoCalculator lotto) {
+        // TODO: enum 클래스 반복문으로 출력하도록 수정
+        /*
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원) - " + lotto.getCountOfWins(3) + "개");
         System.out.println("4개 일치 (50000원) - " + lotto.getCountOfWins(4) + "개");
         System.out.println("5개 일치 (1500000원) - " + lotto.getCountOfWins(5) + "개");
         System.out.println("6개 일치 (2000000000원) - " + lotto.getCountOfWins(6) + "개");
-        System.out.println("총 수익률은 " + lotto.getRateOfReturn() + "입니다.");
+        System.out.println("총 수익률은 " + lotto.getRateOfReturn() + "입니다.");*/
     }
 }

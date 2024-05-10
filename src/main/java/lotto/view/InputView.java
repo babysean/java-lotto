@@ -1,17 +1,15 @@
 package lotto.view;
 
-import lotto.domain.LastWeekLottoNumberValidator;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static lotto.service.LottoService.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class InputView {
+    /** 로또 개수 */
+    public static final int LOTTO_PRICE = 1000;
+
     /**
      * 구매할 금액을 입력 받아 반환합니다.
      *
-     * @author 박상훈
      * @return int
      * */
     public int insertMoney() {
@@ -34,26 +32,20 @@ public class InputView {
     }
 
     /**
-     * 지난 주 당첨 번호를 입력 받아 반환합니다.
+     * 지난 주 당첨 번호를 입력 받아 반환 합니다.
      *
-     * @author 박상훈
-     * @return List
+     * @return String[]
      * */
-    public List<Integer> insertLastWeekWinningNumber() {
+    public String[] inputLastWeekWinningLottoNumbers() {
         String scanValue;
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
 
         scanValue = scanner.nextLine();
-        String[] lastWeekWinningNumber = scanValue
+
+        return scanValue
                 .replace(" ", "")
                 .split(",");
-
-        // 유효성 체크
-        LastWeekLottoNumberValidator validator = new LastWeekLottoNumberValidator();
-        validator.validate(lastWeekWinningNumber);
-
-        return Arrays.stream(lastWeekWinningNumber).map(Integer::parseInt).collect(Collectors.toList());
     }
 }
