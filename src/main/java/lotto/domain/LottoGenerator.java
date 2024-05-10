@@ -9,10 +9,9 @@ public class LottoGenerator {
     public static final int MAX_LOTTO_NUMBER = 45;
 
     /**
-     * 로또 번호를 생성하려 반환합니다.
+     * 로또 번호를 생성하고 반환합니다.
      *
-     * @author 박상훈
-     * @return List<Integer>
+     * @return LottoTicket 로또 티켓
      * */
     public LottoTicket generate() {
         List<Integer> numbers = new ArrayList<>();

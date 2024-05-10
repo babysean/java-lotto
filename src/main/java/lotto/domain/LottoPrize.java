@@ -1,11 +1,10 @@
 package lotto.domain;
 
 public enum LottoPrize {
-    // TODO : 숫자를 _로 구분하기 (콤마 대신)
-    THREE_MATCHES(3, 5000),
-    FOUR_MATCHES(4, 50000),
-    FIVE_MATCHES(5, 1500000),
-    SIX_MATCHES(6, 2000000000);
+    THREE_MATCHES(3, 5_000),
+    FOUR_MATCHES(4, 50_000),
+    FIVE_MATCHES(5, 1_500_000),
+    SIX_MATCHES(6, 2_000_000_000);
 
     private final int matches;
     private final int prize;

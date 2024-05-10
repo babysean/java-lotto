@@ -9,12 +9,11 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class LottoApplication {
-    private LottoConsumer consumer;
+    private final LottoConsumer consumer;
 
+    private final InputView inputView;
 
-    private InputView inputView;
-
-    private OutputView outputView;
+    private final OutputView outputView;
 
     public LottoApplication(LottoConsumer consumer, InputView inputView, OutputView outputView) {
         this.consumer = consumer;
@@ -39,7 +38,13 @@ public class LottoApplication {
         // 로또 계산
         List<Integer> winningCounts = lottoService.calculate(lottoTickets, winningTicket);
 
-        // TODO: 맞춘 개수 및 수익률 계산
+        // 로또 결과 출력
+        outputView.printResultTitle();
+        lottoService.printWinningInformation(winningCounts, outputView);
+
+        // 수익률 출력
+        double profit = lottoService.getProfit(winningCounts, money);
+        outputView.printProfit(profit);
     }
 
     public static void main(String[] args) {

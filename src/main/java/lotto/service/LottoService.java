@@ -1,22 +1,19 @@
 package lotto.service;
 
-import lotto.domain.LastWeekLottoValidator;
-import lotto.domain.LottoCalculator;
-import lotto.domain.LottoConsumer;
-import lotto.domain.LottoTicket;
+import lotto.domain.*;
+import lotto.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoService {
-    // TODO: 도메인들의 로직을 구현한다. loose coupling !!!!
-
     /**
      * 로또 번호를 생성하고 목록을 반환 합니다.
      *
      * @param consumer LottoConsumer
      * @param money 구매 금액
+     * @return List<LottoTicket>
      * */
     public List<LottoTicket> buyLotto(LottoConsumer consumer, int money) {
         return consumer.buyLotto(money);
@@ -46,23 +43,39 @@ public class LottoService {
      * @return List<Integer>
      * */
     public List<Integer> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        LottoCalculator calculator = new LottoCalculator(lottoTickets, winningTicket);
+        LottoCalculator calculator = new LottoCalculator();
 
-        return calculator.calculate();
+        return calculator.calculate(lottoTickets, winningTicket);
     }
 
     /**
-     * 전달받은 수 만큼 맞은 로또의 개수를 반환합니다.
+     * 로또 결과 출력을 위한 데이터를 생성 합니다.
+     * 반복하여 view 에 결과를 전달하여 텍스트를 출력합니다.
      *
-     * @param matchingCount 일치하는 숫자의 개수 목록
-     * @param checkNumber 확인할 개수
-     * @return int
+     * @param matchingCounts 일치하는 숫자의 개수 목록
+     * @param view 결과 view instance
      * */
-    public int getCountOfWins(List<Integer> matchingCount, int checkNumber) {
-        return (int) matchingCount
-                .stream()
-                .filter(count -> count == checkNumber)
-                .count();
+    public void printWinningInformation(List<Integer> matchingCounts, OutputView view) {
+        LottoCalculator calculator = new LottoCalculator();
+
+        for (LottoPrize prize : LottoPrize.values()) {
+            view.printWinningInformation(prize, calculator.getCountOfWin(matchingCounts, prize.getMatches()));
+        }
     }
 
+    /**
+     * 로또 수익률을 계산 합니다.
+     *
+     * @param matchingCounts 일치하는 숫자의 개수 목록
+     * @param money 구매 금액
+     * */
+    public Double getProfit(List<Integer> matchingCounts, int money) {
+        LottoCalculator calculator = new LottoCalculator();
+
+        int prizeMoney = calculator.getPrizeMoney(matchingCounts);
+
+        double rateOfReturn = (double) prizeMoney / (double) money;
+
+        return Math.floor(rateOfReturn * 1000) / 1000;
+    }
 }
