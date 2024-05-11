@@ -14,15 +14,6 @@ public class LottoTicket {
     }
 
     /**
-     * 로또 번호를 티켓에 저장합니다.
-     *
-     * @param number 로또 숫자
-     * */
-    public void add(int number) {
-        numbers.add(number);
-    }
-
-    /**
      * 로또 티켓을 반환 합니다.
      *
      * @return List<Integer>
@@ -30,5 +21,4 @@ public class LottoTicket {
     public List<Integer> get() {
         return numbers;
     }
-
 }
