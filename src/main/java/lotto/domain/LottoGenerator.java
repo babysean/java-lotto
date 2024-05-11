@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
+    /** 로또 숫자의 최솟값 */
     public static final int MIN_LOTTO_NUMBER = 1;
+    /** 로또 숫자의 최댓값 */
     public static final int MAX_LOTTO_NUMBER = 45;
 
     /**
