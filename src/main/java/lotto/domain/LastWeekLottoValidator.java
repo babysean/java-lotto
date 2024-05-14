@@ -13,6 +13,10 @@ public class LastWeekLottoValidator {
     /** 로또 숫자의 최댓값 */
     public static final int MAX_LOTTO_NUMBER = 45;
 
+    private static final String COMMA_SEPARATED_NUMBERS = "당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.";
+    private static final String AN_INTEGER_BETWEEN_1_AND_45 = "각 당첨번호는 1과 45 사이의 정수이어야 합니다.";
+    private static final String NOT_DUPLICATE_NUMBERS = "당첨번호에 중복된 숫자가 없어야 합니다.";
+
     /**
      * 지난 주 당첨 번호에 대한 유효성을 확인 합니다.
      * <p>1. 번호가 6개 인지</p>
@@ -26,15 +30,15 @@ public class LastWeekLottoValidator {
      * */
     public void validate(String[] number) {
         if (!isSizeCorrect(number)) {
-            throw new IllegalArgumentException("당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.");
+            throw new IllegalArgumentException(COMMA_SEPARATED_NUMBERS);
         }
 
         if (!isNumberCorrect(number)) {
-            throw new IllegalArgumentException("각 당첨번호는 1과 45 사이의 정수이어야 합니다.");
+            throw new IllegalArgumentException(AN_INTEGER_BETWEEN_1_AND_45);
         }
 
         if (!isNumberUnique(number)) {
-            throw new IllegalArgumentException("당첨번호에 중복된 숫자가 없어야 합니다.");
+            throw new IllegalArgumentException(NOT_DUPLICATE_NUMBERS);
         }
     }
 
