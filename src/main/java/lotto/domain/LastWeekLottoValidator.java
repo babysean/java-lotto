@@ -2,16 +2,15 @@ package lotto.domain;
 
 import java.util.Arrays;
 
+import static lotto.domain.LottoGenerator.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoGenerator.MIN_LOTTO_NUMBER;
+
 /**
  * 지난 주 로또 번호의 유효성을 체크하는 클래스입니다.
  * */
 public class LastWeekLottoValidator {
     /** 로또 티켓의 숫자 개수 */
     public static final int LOTTO_NUMBER_SIZE = 6;
-    /** 로또 숫자의 최솟값 */
-    public static final int MIN_LOTTO_NUMBER = 1;
-    /** 로또 숫자의 최댓값 */
-    public static final int MAX_LOTTO_NUMBER = 45;
 
     private static final String COMMA_SEPARATED_NUMBERS = "당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.";
     private static final String AN_INTEGER_BETWEEN_1_AND_45 = "각 당첨번호는 1과 45 사이의 정수이어야 합니다.";
