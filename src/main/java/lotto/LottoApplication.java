@@ -16,15 +16,16 @@ public class LottoApplication {
 
     private final OutputView outputView;
 
-    public LottoApplication(LottoConsumer consumer, InputView inputView, OutputView outputView) {
+    private final LottoService lottoService;
+
+    public LottoApplication(LottoConsumer consumer, InputView inputView, OutputView outputView, LottoService lottoService) {
         this.consumer = consumer;
         this.inputView = inputView;
         this.outputView = outputView;
+        this.lottoService = lottoService;
     }
 
     public void run() {
-        LottoService lottoService = new LottoService(new LottoCalculator());
-
         // 로또 구매 금액 입력 및 구매
         int money = inputView.insertMoney();
         List<LottoTicket> lottoTickets = lottoService.buyLotto(consumer, money);
@@ -49,7 +50,7 @@ public class LottoApplication {
     }
 
     public static void main(String[] args) {
-        LottoApplication lottoApplication = new LottoApplication(new LottoConsumer(), new InputView(), new OutputView());
+        LottoApplication lottoApplication = new LottoApplication(new LottoConsumer(), new InputView(), new OutputView(), new LottoService(new LottoCalculator()));
         lottoApplication.run();
     }
 }
