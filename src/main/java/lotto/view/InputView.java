@@ -3,10 +3,9 @@ package lotto.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class InputView {
-    /** 로또 개수 */
-    public static final int LOTTO_PRICE = 1000;
+import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
+public class InputView {
     /**
      * 구매할 금액을 입력 받아 반환합니다.
      *

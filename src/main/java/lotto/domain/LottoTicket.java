@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
  * 로또 티켓을 관리하는 클래스 입니다.
  * */
 public class LottoTicket {
+    /** 로또 가격 */
+    public static final int LOTTO_PRICE = 1000;
+
     /** 구매한 로또 번호 */
     private final List<Integer> numbers;
 

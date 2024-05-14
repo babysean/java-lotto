@@ -3,11 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
 public class LottoConsumer {
-    /** 로또 가격 */
-    public static final int LOTTO_PRICE = 1000;
-
     /**
      * 로또 번호 생성하고 반환 합니다.
      *
