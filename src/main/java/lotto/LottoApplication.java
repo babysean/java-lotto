@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoCalculator;
 import lotto.domain.LottoConsumer;
 import lotto.domain.LottoTicket;
 import lotto.service.LottoService;
@@ -22,7 +23,7 @@ public class LottoApplication {
     }
 
     public void run() {
-        LottoService lottoService = new LottoService();
+        LottoService lottoService = new LottoService(new LottoCalculator());
 
         // 로또 구매 금액 입력 및 구매
         int money = inputView.insertMoney();

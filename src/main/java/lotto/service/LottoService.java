@@ -6,6 +6,13 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class LottoService {
+    /** 로또 계산기 */
+    LottoCalculator calculator;
+
+    public LottoService(LottoCalculator calculator) {
+        this.calculator = calculator;
+    }
+
     /**
      * 로또 번호를 생성하고 목록을 반환 합니다.
      *
@@ -39,8 +46,6 @@ public class LottoService {
      * @return List<Integer>
      * */
     public List<Integer> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        LottoCalculator calculator = new LottoCalculator();
-
         return calculator.calculate(lottoTickets, winningTicket);
     }
 
@@ -52,8 +57,6 @@ public class LottoService {
      * @param view 결과 view instance
      * */
     public void printWinningInformation(List<Integer> matchingCounts, OutputView view) {
-        LottoCalculator calculator = new LottoCalculator();
-
         for (LottoPrize prize : LottoPrize.values()) {
             view.printWinningInformation(prize, calculator.getCountOfWin(matchingCounts, prize.getMatches()));
         }
@@ -66,8 +69,6 @@ public class LottoService {
      * @param money 구매 금액
      * */
     public Double getProfit(List<Integer> matchingCounts, int money) {
-        LottoCalculator calculator = new LottoCalculator();
-
         int prizeMoney = calculator.getPrizeMoney(matchingCounts);
 
         return calculator.getProfit(prizeMoney, money);
