@@ -54,4 +54,17 @@ public class LottoCalculator {
 
         return prizeMoney;
     }
+
+    /**
+     * 로또 수익률을 계산하여 반환 합니다.
+     *
+     * @param prizeMoney 당첨금
+     * @param money 로또 구매 금액
+     * @return Double
+     * */
+    public Double getProfit(int prizeMoney, int money) {
+        double rateOfReturn = (double) prizeMoney / (double) money;
+
+        return Math.floor(rateOfReturn * 1000) / 1000;
+    }
 }

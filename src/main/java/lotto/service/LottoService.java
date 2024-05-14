@@ -70,8 +70,6 @@ public class LottoService {
 
         int prizeMoney = calculator.getPrizeMoney(matchingCounts);
 
-        double rateOfReturn = (double) prizeMoney / (double) money;
-
-        return Math.floor(rateOfReturn * 1000) / 1000;
+        return calculator.getProfit(prizeMoney, money);
     }
 }
