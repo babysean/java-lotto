@@ -54,5 +54,4 @@ class LastWeekLottoValidatorTest {
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.validate(winningNumbers));
     }
-
 }
