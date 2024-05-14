@@ -3,9 +3,7 @@ package lotto.service;
 import lotto.domain.*;
 import lotto.view.OutputView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoService {
     /**
@@ -30,9 +28,7 @@ public class LottoService {
         LastWeekLottoValidator validator = new LastWeekLottoValidator();
         validator.validate(numbers);
 
-        List<Integer> numberList = Arrays.stream(numbers).map(Integer::parseInt).collect(Collectors.toList());
-
-        return new LottoTicket(numberList);
+        return new LottoTicket(numbers);
     }
 
     /**
