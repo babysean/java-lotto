@@ -18,7 +18,7 @@ public class LottoService {
     }
 
     /**
-     * 지난 주 당첨 로또를 가공하여 LottoTicket 으로 만듧니다.
+     * 지난 주 당첨 로또를 가공하여 LottoTicket 으로 만듭니다.
      *
      * @param numbers 지난 주 당첨 번호
      * @return LottoTicket
