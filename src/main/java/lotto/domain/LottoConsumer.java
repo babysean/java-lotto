@@ -20,7 +20,7 @@ public class LottoConsumer {
 
         for (int i = 0; i < purchasedCount; i++) {
             LottoGenerator generator = new LottoGenerator();
-            lottoTickets.add(generator.generate());
+            lottoTickets.add(new LottoTicket(generator.generate()));
         }
 
         return lottoTickets;

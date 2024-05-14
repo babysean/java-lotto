@@ -15,7 +15,7 @@ public class LottoGenerator {
      *
      * @return LottoTicket 로또 티켓
      * */
-    public LottoTicket generate() {
+    public List<Integer> generate() {
         List<Integer> numbers = new ArrayList<>();
 
         for (int i = MIN_LOTTO_NUMBER ; i <= MAX_LOTTO_NUMBER ; i++) {
@@ -28,6 +28,6 @@ public class LottoGenerator {
 
         Collections.sort(shuffledNumber);
 
-        return new LottoTicket(shuffledNumber);
+        return shuffledNumber;
     }
 }
