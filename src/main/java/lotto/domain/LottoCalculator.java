@@ -60,9 +60,9 @@ public class LottoCalculator {
      *
      * @param prizeMoney 당첨금
      * @param money 로또 구매 금액
-     * @return Double
+     * @return double
      * */
-    public Double getProfit(int prizeMoney, int money) {
+    public double getProfit(int prizeMoney, int money) {
         double rateOfReturn = (double) prizeMoney / (double) money;
 
         return Math.floor(rateOfReturn * 1000) / 1000;
