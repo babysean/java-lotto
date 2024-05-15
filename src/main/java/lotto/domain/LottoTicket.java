@@ -15,7 +15,9 @@ public class LottoTicket {
     private final List<Integer> numbers;
 
     public LottoTicket(String[] numbers) {
-        this.numbers = Arrays.stream(numbers).map(Integer::parseInt).collect(Collectors.toList());
+        this(Arrays.stream(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     public LottoTicket(List<Integer> numbers) {
