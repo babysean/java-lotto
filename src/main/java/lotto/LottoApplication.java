@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.LottoCalculator;
 import lotto.domain.LottoConsumer;
 import lotto.domain.LottoTicket;
+import lotto.factory.LottoApplicationFactory;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -50,7 +50,8 @@ public class LottoApplication {
     }
 
     public static void main(String[] args) {
-        LottoApplication lottoApplication = new LottoApplication(new LottoConsumer(), new InputView(), new OutputView(), new LottoService(new LottoCalculator()));
+        LottoApplicationFactory factory = new LottoApplicationFactory();
+        LottoApplication lottoApplication = factory.createLottoApplication();
         lottoApplication.run();
     }
 }
