@@ -14,14 +14,13 @@ public class LottoService {
     }
 
     /**
-     * 로또 번호를 생성하고 목록을 반환 합니다.
+     * 로또 티켓을 구매합니다.
      *
      * @param consumer LottoConsumer
      * @param money 구매 금액
-     * @return List<LottoTicket>
      * */
-    public List<LottoTicket> buyLotto(LottoConsumer consumer, int money) {
-        return consumer.buyLotto(money);
+    public void buyLotto(LottoConsumer consumer, int money) {
+        consumer.buyLotto(money);
     }
 
     /**

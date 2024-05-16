@@ -10,35 +10,34 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class LottoApplication {
-    private final LottoConsumer consumer;
-
     private final InputView inputView;
 
     private final OutputView outputView;
 
     private final LottoService lottoService;
 
-    public LottoApplication(LottoConsumer consumer, InputView inputView, OutputView outputView, LottoService lottoService) {
-        this.consumer = consumer;
+    public LottoApplication(InputView inputView, OutputView outputView, LottoService lottoService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoService = lottoService;
     }
 
     public void run() {
+        LottoConsumer consumer = new LottoConsumer();
+
         // 로또 구매 금액 입력 및 구매
         int money = inputView.insertMoney();
-        List<LottoTicket> lottoTickets = lottoService.buyLotto(consumer, money);
+        lottoService.buyLotto(consumer, money);
 
         // 로또 구매 정보 출력
-        outputView.printLottoTicketsInformation(lottoTickets);
+        outputView.printLottoTicketsInformation(consumer.getLottoTickets());
 
         // 지난 주 당첨번호 입력
         String[] LastWeekWinningNumbers = inputView.inputLastWeekWinningLottoNumbers();
         LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
 
         // 로또 계산
-        List<Integer> winningCounts = lottoService.calculate(lottoTickets, winningTicket);
+        List<Integer> winningCounts = lottoService.calculate(consumer.getLottoTickets(), winningTicket);
 
         // 로또 결과 출력
         outputView.printResultTitle();

@@ -16,7 +16,8 @@ class LottoConsumerTest {
 
         // when
         LottoConsumer consumer =  new LottoConsumer();
-        List<LottoTicket> LottoTickets = consumer.buyLotto(moeny);
+        consumer.buyLotto(moeny);
+        List<LottoTicket> LottoTickets = consumer.getLottoTickets();
 
         // then
         assertThat(LottoTickets).hasSize(2);
