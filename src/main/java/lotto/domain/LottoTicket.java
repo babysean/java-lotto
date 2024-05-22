@@ -11,13 +11,17 @@ public class LottoTicket {
     /** 로또 가격 */
     public static final int LOTTO_PRICE = 1000;
 
-    /** 구매한 로또 번호 */
+    /** 로또 번호 */
     private final List<Integer> numbers;
 
-    public LottoTicket(String[] numbers) {
+    /** 보너스 번호 */
+    private int bonusNumber = 0;
+
+    public LottoTicket(String[] numbers, int bonusNumber) {
         this(Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
+        this.bonusNumber = bonusNumber;
     }
 
     public LottoTicket(List<Integer> numbers) {
@@ -31,5 +35,14 @@ public class LottoTicket {
      * */
     public List<Integer> get() {
         return numbers;
+    }
+
+    /**
+     * 보너스 번호를 반환 합니다.
+     *
+     * @return int
+     * */
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 }
