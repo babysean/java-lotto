@@ -13,7 +13,7 @@ public class LastWeekLottoValidator {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private static final String COMMA_SEPARATED_NUMBERS = "당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.";
-    private static final String AN_INTEGER_BETWEEN_1_AND_45 = "각 당첨번호는 1과 45 사이의 정수이어야 합니다.";
+    private static final String AN_INTEGER_BETWEEN_1_AND_45 = "당첨번호는 1과 45 사이의 정수이어야 합니다.";
     private static final String NOT_DUPLICATE_NUMBERS = "당첨번호에 중복된 숫자가 없어야 합니다.";
 
     /**
@@ -27,13 +27,21 @@ public class LastWeekLottoValidator {
      * @exception IllegalArgumentException 각 당첨번호는 1과 45 사이의 정수이어야 합니다.
      * @exception IllegalArgumentException 당첨번호에 중복된 숫자가 없어야 합니다.
      * */
-    public void validate(String[] number) {
+    public void validate(String[] number, int bonusNumber) {
         if (!isSizeCorrect(number)) {
             throw new IllegalArgumentException(COMMA_SEPARATED_NUMBERS);
         }
 
         if (!isNumberCorrect(number)) {
             throw new IllegalArgumentException(AN_INTEGER_BETWEEN_1_AND_45);
+        }
+
+        if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(AN_INTEGER_BETWEEN_1_AND_45);
+        }
+
+        if (!isBonusNumberCorrect(number, bonusNumber)) {
+            throw new IllegalArgumentException(NOT_DUPLICATE_NUMBERS);
         }
 
         if (!isNumberUnique(number)) {
@@ -57,14 +65,14 @@ public class LastWeekLottoValidator {
      * 각 번호는 1 ~ 45사이의 수 입니다.
      * 6개의 번호가 이를 만족하면 true, 아니면 false 를 반환합니다.
      *
-     * @param number 지난 주 당첨 번호
+     * @param numbers 지난 주 당첨 번호
      * @return boolean
      * */
-    private boolean isNumberCorrect(String[] number) {
+    private boolean isNumberCorrect(String[] numbers) {
         return Arrays
-                .stream(number)
+                .stream(numbers)
                 .mapToInt(Integer::parseInt)
-                .allMatch(n -> n >= MIN_LOTTO_NUMBER && n <= MAX_LOTTO_NUMBER);
+                .allMatch(number -> number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER);
     }
 
     /**
@@ -76,5 +84,17 @@ public class LastWeekLottoValidator {
      * */
     private boolean isNumberUnique(String[] number) {
         return Arrays.stream(number).distinct().count() == LOTTO_NUMBER_SIZE;
+    }
+
+    /**
+     * 지난 주 당첨 번호와 보너스 번호가 같은지 확인 합니다.
+     * 중복된 수가 없으면 true, 아니면 false 를 반환합니다.
+     *
+     * @param numbers 지난 주 당첨 번호
+     * @param bonusNumber 보너스 번호
+     * @return boolean
+     * */
+    private boolean isBonusNumberCorrect(String[] numbers, int bonusNumber) {
+        return Arrays.stream(numbers).noneMatch(number -> number.equals(String.valueOf(bonusNumber)));
     }
 }
