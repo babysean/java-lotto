@@ -23,7 +23,7 @@ class LottoCalculatorTest {
         // when
         LottoCalculator calculator = new LottoCalculator();
 
-        List<Integer> matchingCount = calculator.calculate(lottoTickets, winningLottoTicket);
+        List<Double> matchingCount = calculator.calculate(lottoTickets, winningLottoTicket);
 
         int count = calculator.getCountOfWin(matchingCount, 4);
 
@@ -44,7 +44,7 @@ class LottoCalculatorTest {
 
         // when
         LottoCalculator calculator = new LottoCalculator();
-        List<Integer> matchingCount = calculator.calculate(lottoTickets, winningLottoTicket);
+        List<Double> matchingCount = calculator.calculate(lottoTickets, winningLottoTicket);
 
         int prizeMoney = calculator.getPrizeMoney(matchingCount);
 

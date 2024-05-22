@@ -12,6 +12,7 @@ class LastWeekLottoValidatorTest {
     void 당첨번호는_콤마로_구분된_숫자_6개이어야_합니다() {
         // given
         String winningNumber = "1,2,3,4,5,s";
+        int bonusNumber = 45;
         String [] winningNumbers = winningNumber
                 .replace(" ", "")
                 .split(",");
@@ -20,7 +21,7 @@ class LastWeekLottoValidatorTest {
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();
 
         // then
-        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.validate(winningNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.validate(winningNumbers, bonusNumber));
     }
 
     @Test
@@ -28,6 +29,7 @@ class LastWeekLottoValidatorTest {
     void 각_당첨번호는_1과_45_사이의_정수이어야_합니다() {
         // given
         String winningNumber = "1,2,3,4,5,70";
+        int bonusNumber = 45;
         String [] winningNumbers = winningNumber
                 .replace(" ", "")
                 .split(",");
@@ -36,7 +38,7 @@ class LastWeekLottoValidatorTest {
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();
 
         // then
-        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.validate(winningNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.validate(winningNumbers, bonusNumber));
     }
 
     @Test
@@ -44,6 +46,7 @@ class LastWeekLottoValidatorTest {
     void 당첨번호에_중복된_숫자가_없어야_합니다() {
         // given
         String winningNumber = "1,2,3,4,5,5";
+        int bonusNumber = 45;
         String [] winningNumbers = winningNumber
                 .replace(" ", "")
                 .split(",");
@@ -52,6 +55,6 @@ class LastWeekLottoValidatorTest {
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();
 
         // then
-        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.validate(winningNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.validate(winningNumbers, bonusNumber));
     }
 }

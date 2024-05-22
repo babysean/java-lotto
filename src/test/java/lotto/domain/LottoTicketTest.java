@@ -15,9 +15,10 @@ class LottoTicketTest {
     void 로또_티켓_클래스를_문자_배열로_초기화_합니다() {
         // give
         String[] numbers = {"1", "2", "3", "4", "5", "6"};
+        int bonusNumber = 10;
 
         // when
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = new LottoTicket(numbers, bonusNumber);
 
         // then
         assertThat(lottoTicket).isNotNull();
