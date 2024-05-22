@@ -34,13 +34,14 @@ public class LottoApplication {
 
         // 지난 주 당첨번호 입력
         String[] LastWeekWinningNumbers = inputView.inputLastWeekWinningLottoNumbers();
-        LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
-
         // 지난 주 보너스 번호 입력
         int bonusNumber = inputView.inputBonusNumber();
 
-        // 로또 계산
-        List<Integer> winningCounts = lottoService.calculate(consumer.getLottoTickets(), winningTicket);
+        // 지난 주 당첨 티켓 생성
+        LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers, bonusNumber);
+
+        // 맞춘 숫자의 개수 목록
+        List<Double> winningCounts = lottoService.calculate(consumer.getLottoTickets(), winningTicket);
 
         // 로또 결과 출력
         outputView.printResultTitle();
