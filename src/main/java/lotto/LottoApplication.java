@@ -36,6 +36,9 @@ public class LottoApplication {
         String[] LastWeekWinningNumbers = inputView.inputLastWeekWinningLottoNumbers();
         LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
 
+        // 지난 주 보너스 번호 입력
+        int bonusNumber = inputView.inputBonusNumber();
+
         // 로또 계산
         List<Integer> winningCounts = lottoService.calculate(consumer.getLottoTickets(), winningTicket);
 
