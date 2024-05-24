@@ -12,14 +12,6 @@ public class LottoTicket {
     /** 로또 번호 */
     private final List<Integer> numbers;
 
-    /** 보너스 번호 */
-    private int bonusNumber = 0;
-
-    public LottoTicket(List<Integer> numbers, int bonusNumber) {
-        this(numbers);
-        this.bonusNumber = bonusNumber;
-    }
-
     public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
     }
@@ -31,14 +23,5 @@ public class LottoTicket {
      * */
     public List<Integer> get() {
         return numbers;
-    }
-
-    /**
-     * 보너스 번호를 반환 합니다.
-     *
-     * @return int
-     * */
-    public int getBonusNumber() {
-        return bonusNumber;
     }
 }

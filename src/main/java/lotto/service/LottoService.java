@@ -31,7 +31,7 @@ public class LottoService {
      * @param numbers 지난 주 당첨 번호
      * @return LottoTicket
      * */
-    public LottoTicket winningNumberToTicket(String[] numbers, int bonusNumber) {
+    public LottoTicket winningNumberToTicket(String[] numbers) {
         List<Integer> lottoNumbers = Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -39,11 +39,8 @@ public class LottoService {
         // 유효성 체크
         LastWeekLottoValidator validator = new LastWeekLottoValidator();
         validator.winningNumbersValidation(lottoNumbers);
-        validator.bonusNumberValidation(lottoNumbers, bonusNumber);
 
-
-
-        return new LottoTicket(lottoNumbers, bonusNumber);
+        return new LottoTicket(lottoNumbers);
     }
 
     /**
@@ -51,9 +48,9 @@ public class LottoService {
      *
      * @param lottoTickets 구매한 로또 티켓
      * @param winningTicket 지난 주 당첨 로또 티켓
-     * @return List<Double>
+     * @return List<Integer>
      * */
-    public List<Double> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
+    public List<Integer> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
         return calculator.calculate(lottoTickets, winningTicket);
     }
 
@@ -64,7 +61,7 @@ public class LottoService {
      * @param matchingCounts 일치하는 숫자의 개수 목록
      * @param view 결과 view instance
      * */
-    public void printWinningInformation(List<Double> matchingCounts, OutputView view) {
+    public void printWinningInformation(List<Integer> matchingCounts, OutputView view) {
         for (LottoPrize prize : LottoPrize.values()) {
             view.printWinningInformation(prize, calculator.getCountOfWin(matchingCounts, prize.getMatches()));
         }
@@ -76,7 +73,7 @@ public class LottoService {
      * @param matchingCounts 일치하는 숫자의 개수 목록
      * @param money 구매 금액
      * */
-    public Double getProfit(List<Double> matchingCounts, int money) {
+    public Double getProfit(List<Integer> matchingCounts, int money) {
         int prizeMoney = calculator.getPrizeMoney(matchingCounts);
 
         return calculator.getProfit(prizeMoney, money);

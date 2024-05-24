@@ -11,20 +11,6 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 @DisplayName("로또 티켓에 대한 테스트 코드")
 class LottoTicketTest {
     @Test
-    @DisplayName("로또_번호와_보너스_번호로_로또_티켓을_생성합니다")
-    void 로또_번호와_보너스_번호로_로또_티켓을_생성합니다() {
-        // give
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 10;
-
-        // when
-        LottoTicket lottoTicket = new LottoTicket(numbers, bonusNumber);
-
-        // then
-        assertThat(lottoTicket).isNotNull();
-    }
-
-    @Test
     @DisplayName("로또_번호로_로또_티켓을_생성합니다")
     void 로또_번호로_로또_티켓을_생성합니다() {
         // give
