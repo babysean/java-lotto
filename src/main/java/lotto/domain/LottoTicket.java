@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 로또 티켓을 관리하는 클래스 입니다.
@@ -17,10 +15,8 @@ public class LottoTicket {
     /** 보너스 번호 */
     private int bonusNumber = 0;
 
-    public LottoTicket(String[] numbers, int bonusNumber) {
-        this(Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+    public LottoTicket(List<Integer> numbers, int bonusNumber) {
+        this(numbers);
         this.bonusNumber = bonusNumber;
     }
 

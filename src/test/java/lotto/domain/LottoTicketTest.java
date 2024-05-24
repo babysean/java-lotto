@@ -11,10 +11,10 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 @DisplayName("로또 티켓에 대한 테스트 코드")
 class LottoTicketTest {
     @Test
-    @DisplayName("로또_티켓_클래스를_문자_배열로_초기화_합니다")
-    void 로또_티켓_클래스를_문자_배열로_초기화_합니다() {
+    @DisplayName("로또_번호와_보너스_번호로_로또_티켓을_생성합니다")
+    void 로또_번호와_보너스_번호로_로또_티켓을_생성합니다() {
         // give
-        String[] numbers = {"1", "2", "3", "4", "5", "6"};
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 10;
 
         // when
@@ -25,8 +25,8 @@ class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또_티켓_클래스를_리스트로_초기화_합니다")
-    void 로또_티켓_클래스를_리스트로_초기화_합니다() {
+    @DisplayName("로또_번호로_로또_티켓을_생성합니다")
+    void 로또_번호로_로또_티켓을_생성합니다() {
         // give
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 

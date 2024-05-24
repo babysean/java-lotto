@@ -3,7 +3,9 @@ package lotto.service;
 import lotto.domain.*;
 import lotto.view.OutputView;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoService {
     /** 로또 계산기 */
@@ -30,11 +32,18 @@ public class LottoService {
      * @return LottoTicket
      * */
     public LottoTicket winningNumberToTicket(String[] numbers, int bonusNumber) {
+        List<Integer> lottoNumbers = Arrays.stream(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
         // 유효성 체크
         LastWeekLottoValidator validator = new LastWeekLottoValidator();
-        validator.validate(numbers, bonusNumber);
+        validator.winningNumbersValidation(lottoNumbers);
+        validator.bonusNumberValidation(lottoNumbers, bonusNumber);
 
-        return new LottoTicket(numbers, bonusNumber);
+
+
+        return new LottoTicket(lottoNumbers, bonusNumber);
     }
 
     /**

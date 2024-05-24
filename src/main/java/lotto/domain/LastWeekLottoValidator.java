@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import static lotto.domain.LottoGenerator.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoGenerator.MIN_LOTTO_NUMBER;
@@ -22,79 +24,72 @@ public class LastWeekLottoValidator {
      * <p>2. 숫자로 되어있는지</p>
      * <p>3. 중복된 수가 없는지</p>
      *
-     * @param number 지난 주 당첨 번호
+     * @param numbers 지난 주 당첨 번호
      * @exception IllegalArgumentException 당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.
      * @exception IllegalArgumentException 각 당첨번호는 1과 45 사이의 정수이어야 합니다.
      * @exception IllegalArgumentException 당첨번호에 중복된 숫자가 없어야 합니다.
      * */
-    public void validate(String[] number, int bonusNumber) {
-        if (!isSizeCorrect(number)) {
-            throw new IllegalArgumentException(COMMA_SEPARATED_NUMBERS);
-        }
+    public void winningNumbersValidation(List<Integer> numbers) {
+        // 숫자 개수 검사
+        this.checkCorrectLottoFormat(numbers);
 
-        if (!isNumberCorrect(number)) {
-            throw new IllegalArgumentException(AN_INTEGER_BETWEEN_1_AND_45);
-        }
+        // 범위 검사
+        numbers.forEach(this::checkCorrectRange);
 
-        if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(AN_INTEGER_BETWEEN_1_AND_45);
-        }
-
-        if (!isBonusNumberCorrect(number, bonusNumber)) {
-            throw new IllegalArgumentException(NOT_DUPLICATE_NUMBERS);
-        }
-
-        if (!isNumberUnique(number)) {
-            throw new IllegalArgumentException(NOT_DUPLICATE_NUMBERS);
-        }
+        // 중복 검사
+        this.checkUniqueNumber(numbers);
     }
 
     /**
-     * 지난 주 당첨 번호가 ,로 구분된 6개의 숫자인지 확인합니다.
-     * 6개 이면 true, 아니면 false 를 반환합니다.
-     *
-     * @param number 지난 주 당첨 번호
-     * @return boolean
-     */
-    private boolean isSizeCorrect(String[] number) {
-        return number.length == LOTTO_NUMBER_SIZE;
-    }
-
-    /**
-     * 지난 주 당첨 번호가 로또 번호가 맞는지 확인합니다.
-     * 각 번호는 1 ~ 45사이의 수 입니다.
-     * 6개의 번호가 이를 만족하면 true, 아니면 false 를 반환합니다.
-     *
-     * @param numbers 지난 주 당첨 번호
-     * @return boolean
-     * */
-    private boolean isNumberCorrect(String[] numbers) {
-        return Arrays
-                .stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .allMatch(number -> number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER);
-    }
-
-    /**
-     * 지난 주 당첨 번호에 중복된 번호가 없는지 확인합니다.
-     * 중복된 수가 없으면 true, 아니면 false 를 반환합니다.
-     *
-     * @param number 지난 주 당첨 번호
-     * @return boolean
-     * */
-    private boolean isNumberUnique(String[] number) {
-        return Arrays.stream(number).distinct().count() == LOTTO_NUMBER_SIZE;
-    }
-
-    /**
-     * 지난 주 당첨 번호와 보너스 번호가 같은지 확인 합니다.
-     * 중복된 수가 없으면 true, 아니면 false 를 반환합니다.
+     * 보너스 번호의 유효성을 검사합니다.
      *
      * @param numbers 지난 주 당첨 번호
      * @param bonusNumber 보너스 번호
-     * @return boolean
+     * @exception IllegalArgumentException 각 당첨번호는 1과 45 사이의 정수이어야 합니다.
+     * @exception IllegalArgumentException 당첨번호에 중복된 숫자가 없어야 합니다.
      * */
-    private boolean isBonusNumberCorrect(String[] numbers, int bonusNumber) {
-        return Arrays.stream(numbers).noneMatch(number -> number.equals(String.valueOf(bonusNumber)));
+    public void bonusNumberValidation(List<Integer> numbers, int bonusNumber) {
+        // 범위 검사
+        this.checkCorrectRange(bonusNumber);
+
+        // 중복 검사
+        List<Integer> mergedNumbers = new ArrayList<>(numbers);
+        mergedNumbers.add(bonusNumber);
+        this.checkUniqueNumber(mergedNumbers);
+    }
+
+    /**
+     * 지난 주 당첨 번호는 6개의 숫자이어야 합니다.
+     *
+     * @param numbers 지난 주 당첨 번호
+     */
+    private void checkCorrectLottoFormat(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException(COMMA_SEPARATED_NUMBERS);
+        }
+    }
+
+    /**
+     * 당첨 번호가 1 ~ 45 사이의 수 인지 확인합니다.
+     *
+     * @param number 당첨 번호
+     * */
+    private void checkCorrectRange(int number) {
+        if (number >= MAX_LOTTO_NUMBER || number <= MIN_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(AN_INTEGER_BETWEEN_1_AND_45);
+        }
+    }
+
+    /**
+     * 중복된 번호가 없는지 확인합니다.
+     *
+     * @param numbers 당첨 번호
+     * */
+    private void checkUniqueNumber(List<Integer> numbers) {
+        int numberSize = new HashSet<>(numbers).size();
+
+        if (numberSize != numbers.size()) {
+            throw new IllegalArgumentException(NOT_DUPLICATE_NUMBERS);
+        }
     }
 }
