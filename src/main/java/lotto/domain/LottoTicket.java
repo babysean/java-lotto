@@ -12,6 +12,12 @@ public class LottoTicket {
     /** 로또 번호 */
     private final List<Integer> numbers;
 
+    /** 맞춘 개수 */
+    private int winningCount;
+
+    /** 보너스 번호 맞춘 여부 */
+    private boolean isBonusNumberMatched;
+
     public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
     }
@@ -23,5 +29,14 @@ public class LottoTicket {
      * */
     public List<Integer> get() {
         return numbers;
+    }
+
+    /**
+     * 맞춘 개수를 입력 합니다.
+     *
+     * @param winningCount 맞춘 개수
+     * */
+    public void inputWinningCount(int winningCount) {
+
     }
 }

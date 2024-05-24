@@ -43,6 +43,8 @@ public class LottoApplication {
         // 지난 주 당첨 티켓 생성
         LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
 
+        // TODO: LottoTicket 에 맞춘 개수 및 보너스 번호 계산
+
         // 맞춘 숫자의 개수 목록
         List<Integer> winningCounts = lottoService.calculate(consumer.getLottoTickets(), winningTicket);
 
