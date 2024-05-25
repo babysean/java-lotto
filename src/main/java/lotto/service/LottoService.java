@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.domain.*;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,7 +52,14 @@ public class LottoService {
      * @return List<Integer>
      * */
     public List<Integer> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        return calculator.calculate(lottoTickets, winningTicket);
+        List<Integer> winningCounts = new ArrayList<>();
+
+        for(LottoTicket lottoTicket : lottoTickets) {
+            int winningCount = lottoTicket.win(winningTicket);
+            winningCounts.add(winningCount);
+        }
+
+        return winningCounts;
     }
 
     /**

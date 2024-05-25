@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 로또 티켓을 관리하는 클래스 입니다.
@@ -11,12 +13,6 @@ public class LottoTicket {
 
     /** 로또 번호 */
     private final List<Integer> numbers;
-
-    /** 맞춘 개수 */
-    private int winningCount;
-
-    /** 보너스 번호 맞춘 여부 */
-    private boolean isBonusNumberMatched;
 
     public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
@@ -32,11 +28,15 @@ public class LottoTicket {
     }
 
     /**
-     * 맞춘 개수를 입력 합니다.
+     * 맞춘 개수롤 반환 합니다.
      *
-     * @param winningCount 맞춘 개수
+     * @param winningNumber 당첨된 로또 티켓
+     * @return int
      * */
-    public void inputWinningCount(int winningCount) {
+    public int win(LottoTicket winningNumber) {
+        Set<Integer> intersection = new HashSet<>(numbers);
+        intersection.retainAll(winningNumber.get());
 
+        return intersection.size();
     }
 }

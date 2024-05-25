@@ -28,22 +28,6 @@ public class LottoCalculator {
     }
 
     /**
-     * 당첨 결과를 계산 합니다.
-     *
-     * @param lottoTickets 구매한 로또 티켓 목록
-     * @param winningTicket 지난 주 당첨 번호
-     * */
-    public void checkLotto(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            // 일치하는 번호 목록
-            Set<Integer> intersection = new HashSet<>(lottoTicket.get());
-            intersection.retainAll(winningTicket.get());
-
-            // TODO: 맞춘 개수를 관리하는 쪽은 어디가 좋지 ?
-        }
-    }
-
-    /**
      * 전달받은 수 만큼 맞은 로또의 개수를 반환합니다.
      *
      * @param matchingCounts 일치하는 숫자의 개수 목록
