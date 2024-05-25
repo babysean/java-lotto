@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.ArrayList;
 
 public class LottoCalculator {
+    private static final int SECOND_MATCHED_COUNT = 5;
+
     /**
      * 전달받은 수 만큼 맞은 로또의 개수를 반환합니다.
      *
@@ -15,7 +17,7 @@ public class LottoCalculator {
     public int getCountOfWin(List<LottoResult> result, int checkedCount, boolean isSecondCheck) {
         return (int) result
                 .stream()
-                .filter(lottoResult -> check(lottoResult, checkedCount, isSecondCheck))
+                .filter(lottoResult -> checkWhole(lottoResult, checkedCount, isSecondCheck))
                 .count();
     }
 
@@ -27,26 +29,42 @@ public class LottoCalculator {
      * @param isSecondCheck 2등 인지 확인 여부
      * @return boolean
      * */
-    private boolean check(LottoResult result, int checkedCount, boolean isSecondCheck) {
-        if (isSecondCheck) {
-            return result.getIsWonBonusNumber() && result.getWinningCount() == checkedCount;
+    private boolean checkWhole(LottoResult result, int checkedCount, boolean isSecondCheck) {
+        if (checkedCount == SECOND_MATCHED_COUNT) {
+            return this.checkSecond(result, checkedCount, isSecondCheck);
         }
 
         return result.getWinningCount() == checkedCount;
     }
 
     /**
+     * 로또 티켓의 2등을 확인합니다.
+     *
+     * @param result 로또 티켓의 결과 목록
+     * @param checkedCount 확인할 맞춘 개수
+     * @param isSecondCheck 2등 인지 확인 여부
+     * @return boolean
+     * */
+    private boolean checkSecond(LottoResult result, int checkedCount, boolean isSecondCheck) {
+        if (isSecondCheck) {
+            return result.getIsWonBonusNumber() && result.getWinningCount() == checkedCount;
+        }
+
+        return !result.getIsWonBonusNumber() && result.getWinningCount() == checkedCount;
+    }
+
+    /**
      * 당첨금을 계산하여 반환 합니다.
      *
-     * @param matchingCounts 일치하는 숫자의 개수 목록
+     * @param results 로또 결과 객체
      * @return int
      * */
-    public int getPrizeMoney(List<Integer> matchingCounts) {
+    public int getPrizeMoney(List<LottoResult> results) {
         int prizeMoney = 0;
 
-        /*for (LottoPrize prize : LottoPrize.values()) {
-            prizeMoney += prize.getPrize() * this.getCountOfWin(matchingCounts, prize.getMatches());
-        }*/
+        for (LottoPrize prize : LottoPrize.values()) {
+            prizeMoney += prize.getPrize() * this.getCountOfWin(results, prize.getMatches(), prize.getBonusNumber());
+        }
 
         return prizeMoney;
     }

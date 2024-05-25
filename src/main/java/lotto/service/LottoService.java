@@ -79,11 +79,11 @@ public class LottoService {
     /**
      * 로또 수익률을 계산 합니다.
      *
-     * @param matchingCounts 일치하는 숫자의 개수 목록
+     * @param results 로또 결과 객체
      * @param money 구매 금액
      * */
-    public Double getProfit(List<Integer> matchingCounts, int money) {
-        int prizeMoney = calculator.getPrizeMoney(matchingCounts);
+    public Double getProfit(List<LottoResult> results, int money) {
+        int prizeMoney = calculator.getPrizeMoney(results);
 
         return calculator.getProfit(prizeMoney, money);
     }

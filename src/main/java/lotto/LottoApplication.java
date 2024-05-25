@@ -39,12 +39,8 @@ public class LottoApplication {
         // 지난 주 보너스 번호 입력
         int bonusNumber = inputView.inputBonusNumber();
 
-        // TODO: 보너스 번호를 어떻게 계산할 것 인가 ?
-
         // 지난 주 당첨 티켓 생성
         LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
-
-        // TODO: LottoTicket 에 맞춘 개수 및 보너스 번호 계산
 
         // 맞춘 번호 개수와 맞춘 보너스 번호 결과
         List<LottoResult> winningResult = lottoService.calculate(consumer.getLottoTickets(), winningTicket, bonusNumber);
@@ -54,7 +50,7 @@ public class LottoApplication {
         lottoService.printWinningInformation(winningResult, outputView);
 
         // 수익률 출력
-        // double profit = lottoService.getProfit(winningCounts, money);
+        double profit = lottoService.getProfit(winningResult, money);
         // outputView.printProfit(profit);
     }
 
