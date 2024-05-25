@@ -66,4 +66,19 @@ class LottoCalculatorTest {
         // then
         assertThat(prizeMoney).isEqualTo(30065000);
     }
+
+    @Test
+    @DisplayName("수익률을_계산하여_반환합니다")
+    void 수익률을_계산하여_반환합니다() {
+        // given
+        int prizeMoney = 10000;
+        int money = 2000;
+
+        // when
+        LottoCalculator calculator = new LottoCalculator();
+        double profit = calculator.getProfit(prizeMoney, money);
+
+        // then
+        assertThat(profit).isEqualTo(5.0);
+    }
 }
