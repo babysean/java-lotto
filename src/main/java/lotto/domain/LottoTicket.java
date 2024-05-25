@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 로또 티켓을 관리하는 클래스 입니다.

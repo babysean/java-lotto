@@ -51,7 +51,7 @@ public class LottoApplication {
 
         // 수익률 출력
         double profit = lottoService.getProfit(winningResult, money);
-        // outputView.printProfit(profit);
+        outputView.printProfit(profit);
     }
 
     public static void main(String[] args) {
