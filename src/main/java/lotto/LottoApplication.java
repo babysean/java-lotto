@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoConsumer;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.factory.LottoApplicationFactory;
 import lotto.service.LottoService;
@@ -46,15 +47,15 @@ public class LottoApplication {
         // TODO: LottoTicket 에 맞춘 개수 및 보너스 번호 계산
 
         // 맞춘 숫자의 개수 목록
-        List<Integer> winningCounts = lottoService.calculate(consumer.getLottoTickets(), winningTicket);
+        List<LottoResult> winningResult = lottoService.calculate(consumer.getLottoTickets(), winningTicket, bonusNumber);
 
         // 로또 결과 출력
         outputView.printResultTitle();
-        lottoService.printWinningInformation(winningCounts, outputView);
+        // lottoService.printWinningInformation(winningCounts, outputView);
 
         // 수익률 출력
-        double profit = lottoService.getProfit(winningCounts, money);
-        outputView.printProfit(profit);
+        // double profit = lottoService.getProfit(winningCounts, money);
+        // outputView.printProfit(profit);
     }
 
     public static void main(String[] args) {

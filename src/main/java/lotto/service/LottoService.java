@@ -49,17 +49,18 @@ public class LottoService {
      *
      * @param lottoTickets 구매한 로또 티켓
      * @param winningTicket 지난 주 당첨 로또 티켓
-     * @return List<Integer>
+     * @param bonusNumber 보너스 번호
+     * @return List<LottoResult>
      * */
-    public List<Integer> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        List<Integer> winningCounts = new ArrayList<>();
+    public List<LottoResult> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket, int bonusNumber) {
+        List<LottoResult> winningResult = new ArrayList<>();
 
         for(LottoTicket lottoTicket : lottoTickets) {
-            int winningCount = lottoTicket.win(winningTicket);
-            winningCounts.add(winningCount);
+            LottoResult result = lottoTicket.win(winningTicket, bonusNumber);
+            winningResult.add(result);
         }
 
-        return winningCounts;
+        return winningResult;
     }
 
     /**

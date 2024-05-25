@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,4 +24,19 @@ class LottoTicketTest {
         assertThat(lottoTicket).isNotNull();
     }
 
+    @Test
+    @DisplayName("맞춘_결과를_반환_합니다")
+    void 맞춘_결과를_반환_합니다(){
+        // given
+        LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket winningLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 9, 10));
+        int bonusNumber = 6;
+
+        // when
+        LottoResult result = purchasedLottoTicket.win(winningLottoTicket, bonusNumber);
+
+        // then
+        assertThat(result.getWinningCount()).isEqualTo(4);
+        assertThat(result.getIsWonBonusNumber()).isTrue();
+    }
 }
