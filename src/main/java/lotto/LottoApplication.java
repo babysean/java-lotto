@@ -46,12 +46,12 @@ public class LottoApplication {
 
         // TODO: LottoTicket 에 맞춘 개수 및 보너스 번호 계산
 
-        // 맞춘 숫자의 개수 목록
+        // 맞춘 번호 개수와 맞춘 보너스 번호 결과
         List<LottoResult> winningResult = lottoService.calculate(consumer.getLottoTickets(), winningTicket, bonusNumber);
 
         // 로또 결과 출력
         outputView.printResultTitle();
-        // lottoService.printWinningInformation(winningCounts, outputView);
+        lottoService.printWinningInformation(winningResult, outputView);
 
         // 수익률 출력
         // double profit = lottoService.getProfit(winningCounts, money);

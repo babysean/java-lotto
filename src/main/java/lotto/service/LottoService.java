@@ -67,12 +67,12 @@ public class LottoService {
      * 로또 결과 출력을 위한 데이터를 생성 합니다.
      * 반복하여 view 에 결과를 전달하여 텍스트를 출력합니다.
      *
-     * @param matchingCounts 일치하는 숫자의 개수 목록
+     * @param lottoResults 일치하는 숫자의 개수 목록
      * @param view 결과 view instance
      * */
-    public void printWinningInformation(List<Integer> matchingCounts, OutputView view) {
+    public void printWinningInformation(List<LottoResult> lottoResults, OutputView view) {
         for (LottoPrize prize : LottoPrize.values()) {
-            view.printWinningInformation(prize, calculator.getCountOfWin(matchingCounts, prize.getMatches()));
+            view.printWinningInformation(prize, calculator.getCountOfWin(lottoResults, prize.getMatches(), prize.getBonusNumber()));
         }
     }
 

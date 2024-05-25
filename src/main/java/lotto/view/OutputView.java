@@ -34,9 +34,9 @@ public class OutputView {
      * @param count 일치하는 개수
      * */
     public void printWinningInformation(LottoPrize prize, int count) {
-        System.out.print((int) prize.getMatches() +"개 일치");
+        System.out.print(prize.getMatches() +"개 일치");
 
-        if (Double.compare(prize.getMatches(), 5.1) == 0) {
+        if (prize.getBonusNumber()) {
             System.out.print(", 보너스 볼 일치");
         }
 
