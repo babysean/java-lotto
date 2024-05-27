@@ -75,7 +75,7 @@ public class LastWeekLottoValidator {
      * @param number 당첨 번호
      * */
     private void checkCorrectRange(int number) {
-        if (number >= MAX_LOTTO_NUMBER || number <= MIN_LOTTO_NUMBER) {
+        if (number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
             throw new IllegalArgumentException(AN_INTEGER_BETWEEN_1_AND_45);
         }
     }
