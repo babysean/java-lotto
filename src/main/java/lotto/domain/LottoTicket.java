@@ -34,7 +34,7 @@ public class LottoTicket {
      * @param bonusNumber 보너스 번호
      * @return int
      * */
-    public LottoResult win(LottoTicket winningNumber, int bonusNumber) {
+    public LottoPrize win(LottoTicket winningNumber, int bonusNumber) {
         Set<Integer> intersection = new HashSet<>(numbers);
         intersection.retainAll(winningNumber.get());
 
@@ -46,6 +46,6 @@ public class LottoTicket {
 
         boolean isWonBonusNumber = 1 == winningBonusNumberCount;
 
-        return new LottoResult(winningCount, isWonBonusNumber);
+        return LottoPrize.findByMatchesAndBonus(winningCount, isWonBonusNumber);
     }
 }

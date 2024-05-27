@@ -6,6 +6,7 @@ import lotto.view.OutputView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoService {
@@ -54,15 +55,26 @@ public class LottoService {
      * @param bonusNumber 보너스 번호
      * @return List<LottoResult>
      * */
-    public List<LottoResult> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket, int bonusNumber) {
-        List<LottoResult> winningResult = new ArrayList<>();
+    public List<LottoPrize> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket, int bonusNumber) {
+        List<LottoPrize> winningResult = new ArrayList<>();
 
-        for(LottoTicket lottoTicket : lottoTickets) {
-            LottoResult result = lottoTicket.win(winningTicket, bonusNumber);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoPrize result = lottoTicket.win(winningTicket, bonusNumber);
             winningResult.add(result);
         }
 
+        removeNullList(winningResult);
+
         return winningResult;
+    }
+
+    /**
+     * List<LottoPrize> 에서 null 값을 제거 합니다.
+     *
+     * @param lottoPrizes 로또 결과
+     * */
+    private void removeNullList(List<LottoPrize> lottoPrizes) {
+        lottoPrizes.removeIf(Objects::isNull);
     }
 
     /**
@@ -72,7 +84,7 @@ public class LottoService {
      * @param lottoResults 일치하는 숫자의 개수 목록
      * @param view 결과 view instance
      * */
-    public void printWinningInformation(List<LottoResult> lottoResults, OutputView view) {
+    public void printWinningInformation(List<LottoPrize> lottoResults, OutputView view) {
         for (LottoPrize prize : LottoPrize.values()) {
             view.printWinningInformation(prize, calculator.getCountOfWin(lottoResults, prize.getMatches(), prize.getIsWonBonusNumber()));
         }
@@ -84,7 +96,7 @@ public class LottoService {
      * @param results 로또 결과 객체
      * @param money 구매 금액
      * */
-    public Double getProfit(List<LottoResult> results, int money) {
+    public Double getProfit(List<LottoPrize> results, int money) {
         int prizeMoney = calculator.getPrizeMoney(results);
 
         return calculator.getProfit(prizeMoney, money);

@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoConsumer;
-import lotto.domain.LottoResult;
+import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import lotto.factory.LottoApplicationFactory;
 import lotto.service.LottoService;
@@ -43,7 +43,7 @@ public class LottoApplication {
         LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
 
         // 맞춘 번호 개수와 맞춘 보너스 번호 결과
-        List<LottoResult> winningResult = lottoService.calculate(consumer.getLottoTickets(), winningTicket, bonusNumber);
+        List<LottoPrize> winningResult = lottoService.calculate(consumer.getLottoTickets(), winningTicket, bonusNumber);
 
         // 로또 결과 출력
         outputView.printResultTitle();

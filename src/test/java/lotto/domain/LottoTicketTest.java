@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,10 +32,10 @@ class LottoTicketTest {
         int bonusNumber = 6;
 
         // when
-        LottoResult result = purchasedLottoTicket.win(winningLottoTicket, bonusNumber);
+        LottoPrize result = purchasedLottoTicket.win(winningLottoTicket, bonusNumber);
 
         // then
-        assertThat(result.getWinningCount()).isEqualTo(4);
+        assertThat(result.getMatches()).isEqualTo(4);
         assertThat(result.getIsWonBonusNumber()).isTrue();
     }
 }
