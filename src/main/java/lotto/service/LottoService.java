@@ -12,8 +12,11 @@ public class LottoService {
     /** 로또 계산기 */
     LottoCalculator calculator;
 
-    public LottoService(LottoCalculator calculator) {
+    LastWeekLottoValidator validator;
+
+    public LottoService(LottoCalculator calculator, LastWeekLottoValidator validator) {
         this.calculator = calculator;
+        this.validator = validator;
     }
 
     /**
@@ -38,7 +41,6 @@ public class LottoService {
                 .collect(Collectors.toList());
 
         // 유효성 체크
-        LastWeekLottoValidator validator = new LastWeekLottoValidator();
         validator.winningNumbersValidation(lottoNumbers);
 
         return new LottoTicket(lottoNumbers);
