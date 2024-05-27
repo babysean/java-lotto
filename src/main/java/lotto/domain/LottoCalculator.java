@@ -62,7 +62,7 @@ public class LottoCalculator {
         int prizeMoney = 0;
 
         for (LottoPrize prize : LottoPrize.values()) {
-            prizeMoney += prize.getPrize() * this.getCountOfWin(results, prize.getMatches(), prize.getBonusNumber());
+            prizeMoney += prize.getPrize() * this.getCountOfWin(results, prize.getMatches(), prize.getIsWonBonusNumber());
         }
 
         return prizeMoney;

@@ -72,7 +72,7 @@ public class LottoService {
      * */
     public void printWinningInformation(List<LottoResult> lottoResults, OutputView view) {
         for (LottoPrize prize : LottoPrize.values()) {
-            view.printWinningInformation(prize, calculator.getCountOfWin(lottoResults, prize.getMatches(), prize.getBonusNumber()));
+            view.printWinningInformation(prize, calculator.getCountOfWin(lottoResults, prize.getMatches(), prize.getIsWonBonusNumber()));
         }
     }
 

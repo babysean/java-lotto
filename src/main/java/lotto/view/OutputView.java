@@ -36,7 +36,7 @@ public class OutputView {
     public void printWinningInformation(LottoPrize prize, int count) {
         System.out.print(prize.getMatches() +"개 일치");
 
-        if (prize.getBonusNumber()) {
+        if (prize.getIsWonBonusNumber()) {
             System.out.print(", 보너스 볼 일치");
         }
 

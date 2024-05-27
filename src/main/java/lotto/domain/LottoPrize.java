@@ -8,12 +8,12 @@ public enum LottoPrize {
     SIX_MATCHES(6, false, 2_000_000_000);
 
     private final int matches;
-    private final boolean bonusNumber;
+    private final boolean isWonBonusNumber;
     private final int prize;
 
     LottoPrize(int matches, boolean bonusNumber, int prize) {
         this.matches = matches;
-        this.bonusNumber = bonusNumber;
+        this.isWonBonusNumber = bonusNumber;
         this.prize = prize;
     }
 
@@ -25,7 +25,7 @@ public enum LottoPrize {
         return prize;
     }
 
-    public boolean getBonusNumber() {
-        return bonusNumber;
+    public boolean getIsWonBonusNumber() {
+        return isWonBonusNumber;
     }
 }
