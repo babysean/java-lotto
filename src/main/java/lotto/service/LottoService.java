@@ -53,7 +53,7 @@ public class LottoService {
      * @param lottoTickets 구매한 로또 티켓
      * @param winningTicket 지난 주 당첨 로또 티켓
      * @param bonusNumber 보너스 번호
-     * @return List<LottoResult>
+     * @return List<LottoPrize>
      * */
     public List<LottoPrize> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket, int bonusNumber) {
         List<LottoPrize> winningResult = new ArrayList<>();
@@ -63,7 +63,7 @@ public class LottoService {
             winningResult.add(result);
         }
 
-        removeNullList(winningResult);
+        this.removeNullList(winningResult);
 
         return winningResult;
     }
@@ -71,7 +71,7 @@ public class LottoService {
     /**
      * List<LottoPrize> 에서 null 값을 제거 합니다.
      *
-     * @param lottoPrizes 로또 결과
+     * @param lottoPrizes 로또 맞춘 결과
      * */
     private void removeNullList(List<LottoPrize> lottoPrizes) {
         lottoPrizes.removeIf(Objects::isNull);

@@ -18,13 +18,15 @@ class LottoCalculatorTest {
         result.add(LottoPrize.findByMatchesAndBonus(3, false));
         result.add(LottoPrize.findByMatchesAndBonus(3, true));
         result.add(LottoPrize.findByMatchesAndBonus(4, false));
+        result.add(LottoPrize.findByMatchesAndBonus(5, true));
+        result.add(LottoPrize.findByMatchesAndBonus(5, false));
 
         // when
         LottoCalculator calculator = new LottoCalculator();
         int count = calculator.getCountOfWin(result, 3, false);
 
         // then
-        assertThat(count).isEqualTo(2);
+        assertThat(count).isEqualTo(3);
     }
 
     @Test

@@ -6,15 +6,15 @@ public class LottoCalculator {
     /**
      * 전달받은 수 만큼 맞은 로또의 개수를 반환합니다.
      *
-     * @param result 로또 티켓의 결과 목록
+     * @param prizes 로또 티켓의 결과 목록
      * @param checkedCount 확인할 맞춘 개수
      * @param isWonBonusNumber 보너스 번호를 맞췄는지 여부
      * @return int
      * */
-    public int getCountOfWin(List<LottoPrize> result, int checkedCount, boolean isWonBonusNumber) {
-        return (int) result
+    public int getCountOfWin(List<LottoPrize> prizes, int checkedCount, boolean isWonBonusNumber) {
+        return (int) prizes
                 .stream()
-                .filter(lottoResult -> lottoResult.getMatches() == checkedCount && lottoResult.getIsWonBonusNumber() == isWonBonusNumber)
+                .filter(prize -> LottoPrize.isMatched(prize, checkedCount, isWonBonusNumber))
                 .count();
     }
 
