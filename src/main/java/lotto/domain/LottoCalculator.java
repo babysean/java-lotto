@@ -21,13 +21,13 @@ public class LottoCalculator {
     /**
      * 당첨금을 계산하여 반환 합니다.
      *
-     * @param results 로또 결과 객체
+     * @param prizes 로또 결과 객체
      * @return int
      * */
-    public int getPrizeMoney(List<LottoPrize> results) {
+    public int getPrizeMoney(List<LottoPrize> prizes) {
         int prizeMoney = 0;
 
-        for (LottoPrize prize : results) {
+        for (LottoPrize prize : prizes) {
             prizeMoney += prize.getPrize();
         }
 

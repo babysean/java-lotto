@@ -14,7 +14,7 @@ public class LottoGenerator {
     /**
      * 로또 번호를 생성하고 반환합니다.
      *
-     * @return LottoTicket 로또 티켓
+     * @return List<Integer> 생성된 로또 티켓 목록
      * */
     public List<Integer> generate() {
         List<Integer> numbers = new ArrayList<>();

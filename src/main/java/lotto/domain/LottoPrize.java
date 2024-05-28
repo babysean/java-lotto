@@ -49,14 +49,14 @@ public enum LottoPrize {
     /**
      * 로또 티켓을 확인 합니다.
      *
-     * @param prize 로또 티켓의 결과 목록
+     * @param prize 로또 티켓의 결과
      * @param checkedCount 확인할 맞춘 개수
-     * @param isSecondCheck 2등 인지 확인 여부
+     * @param isWonBonusNumber 보너스 번호 맞춘 여부
      * @return boolean
      * */
-    public static boolean isMatched(LottoPrize prize, int checkedCount, boolean isSecondCheck) {
+    public static boolean isMatched(LottoPrize prize, int checkedCount, boolean isWonBonusNumber) {
         if (checkedCount == SECOND_MATCHED_COUNT) {
-            return checkSecond(prize, checkedCount, isSecondCheck);
+            return checkSecond(prize, checkedCount, isWonBonusNumber);
         }
 
         return prize.getMatches() == checkedCount;
@@ -65,7 +65,7 @@ public enum LottoPrize {
     /**
      * 로또 티켓의 2등을 확인합니다.
      *
-     * @param prize 로또 티켓의 결과 목록
+     * @param prize 로또 티켓의 결과
      * @param checkedCount 확인할 맞춘 개수
      * @param isMatchedBonusNumber 보너스 번호 맞춘 여부
      * @return boolean

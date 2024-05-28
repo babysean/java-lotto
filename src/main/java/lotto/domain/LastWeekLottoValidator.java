@@ -62,6 +62,7 @@ public class LastWeekLottoValidator {
      * 지난 주 당첨 번호는 6개의 숫자이어야 합니다.
      *
      * @param numbers 지난 주 당첨 번호
+     * @exception IllegalArgumentException 당첨번호는 콤마로 구분된 숫자 6개이어야 합니다.
      */
     private void checkCorrectLottoFormat(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
@@ -73,6 +74,7 @@ public class LastWeekLottoValidator {
      * 당첨 번호가 1 ~ 45 사이의 수 인지 확인합니다.
      *
      * @param number 당첨 번호
+     * @exception IllegalArgumentException 당첨번호는 1과 45 사이의 정수이어야 합니다.
      * */
     private void checkCorrectRange(int number) {
         if (number > MAX_LOTTO_NUMBER || number < MIN_LOTTO_NUMBER) {
@@ -84,6 +86,7 @@ public class LastWeekLottoValidator {
      * 중복된 번호가 없는지 확인합니다.
      *
      * @param numbers 당첨 번호
+     * @exception IllegalArgumentException 당첨번호에 중복된 숫자가 없어야 합니다.
      * */
     private void checkUniqueNumber(List<Integer> numbers) {
         int numberSize = new HashSet<>(numbers).size();

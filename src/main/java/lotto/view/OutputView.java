@@ -9,7 +9,7 @@ public class OutputView {
     /**
      * 로또 구매 개수와 로또 번호를 출력합니다.
      *
-     * @param lottoTickets 로또 객체
+     * @param lottoTickets 로또 티켓 목록
      * */
     public void printLottoTicketsInformation(List<LottoTicket> lottoTickets) {
         System.out.println(lottoTickets.size() + "개를 구매했습니다.");
@@ -30,7 +30,7 @@ public class OutputView {
     /**
      * 로또 결과와 수익률을 출력합니다.
      *
-     * @param prize 로또 결과 enum
+     * @param prize 로또 결과
      * @param count 일치하는 개수
      * */
     public void printWinningInformation(LottoPrize prize, int count) {

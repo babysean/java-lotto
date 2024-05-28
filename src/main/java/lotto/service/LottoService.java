@@ -13,6 +13,7 @@ public class LottoService {
     /** 로또 계산기 */
     LottoCalculator calculator;
 
+    /** 지난 주 당첨 번호 유효성 검사기 */
     LastWeekLottoValidator validator;
 
     public LottoService(LottoCalculator calculator, LastWeekLottoValidator validator) {
@@ -23,7 +24,7 @@ public class LottoService {
     /**
      * 로또 티켓을 구매합니다.
      *
-     * @param consumer LottoConsumer
+     * @param consumer 로또 구매자 객체
      * @param money 구매 금액
      * */
     public void buyLotto(LottoConsumer consumer, int money) {
@@ -71,7 +72,7 @@ public class LottoService {
     /**
      * List<LottoPrize> 에서 null 값을 제거 합니다.
      *
-     * @param lottoPrizes 로또 맞춘 결과
+     * @param lottoPrizes 로또 맞춘 결과 목록
      * */
     private void removeNullList(List<LottoPrize> lottoPrizes) {
         lottoPrizes.removeIf(Objects::isNull);
@@ -81,23 +82,23 @@ public class LottoService {
      * 로또 결과 출력을 위한 데이터를 생성 합니다.
      * 반복하여 view 에 결과를 전달하여 텍스트를 출력합니다.
      *
-     * @param lottoResults 일치하는 숫자의 개수 목록
+     * @param prizes 로또 결과 객체 목록
      * @param view 결과 view instance
      * */
-    public void printWinningInformation(List<LottoPrize> lottoResults, OutputView view) {
+    public void printWinningInformation(List<LottoPrize> prizes, OutputView view) {
         for (LottoPrize prize : LottoPrize.values()) {
-            view.printWinningInformation(prize, calculator.getCountOfWin(lottoResults, prize.getMatches(), prize.getIsWonBonusNumber()));
+            view.printWinningInformation(prize, calculator.getCountOfWin(prizes, prize.getMatches(), prize.getIsWonBonusNumber()));
         }
     }
 
     /**
      * 로또 수익률을 계산 합니다.
      *
-     * @param results 로또 결과 객체
+     * @param prizes 로또 결과 객체 목록
      * @param money 구매 금액
      * */
-    public Double getProfit(List<LottoPrize> results, int money) {
-        int prizeMoney = calculator.getPrizeMoney(results);
+    public Double getProfit(List<LottoPrize> prizes, int money) {
+        int prizeMoney = calculator.getPrizeMoney(prizes);
 
         return calculator.getProfit(prizeMoney, money);
     }
