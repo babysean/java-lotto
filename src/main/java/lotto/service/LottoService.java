@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class LottoService {
     /** 로또 계산기 */
-    LottoCalculator calculator;
+    private final LottoCalculator calculator;
 
     /** 지난 주 당첨 번호 유효성 검사기 */
-    LastWeekLottoValidator validator;
+    private final LastWeekLottoValidator validator;
 
     public LottoService(LottoCalculator calculator, LastWeekLottoValidator validator) {
         this.calculator = calculator;
