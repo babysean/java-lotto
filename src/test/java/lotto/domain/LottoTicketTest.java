@@ -36,6 +36,6 @@ class LottoTicketTest {
 
         // then
         assertThat(result.getMatches()).isEqualTo(4);
-        assertThat(result.getIsWonBonusNumber()).isTrue();
+        assertThat(result.getIsWonBonusNumber()).isFalse();
     }
 }

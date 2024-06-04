@@ -14,7 +14,7 @@ class LastWeekLottoValidatorTest {
     @DisplayName("지난_주_당첨_번호는_6개의_숫자입니다")
     void 지난_주_당첨_번호는_6개의_숫자입니다() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
         // when
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();

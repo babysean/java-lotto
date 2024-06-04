@@ -23,7 +23,7 @@ class LottoCalculatorTest {
 
         // when
         LottoCalculator calculator = new LottoCalculator();
-        int count = calculator.getCountOfWin(result, 3, false);
+        int count = calculator.getCountOfWin(result, LottoPrize.THREE_MATCHES);
 
         // then
         assertThat(count).isEqualTo(3);
