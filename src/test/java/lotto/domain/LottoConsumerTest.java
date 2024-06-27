@@ -14,11 +14,11 @@ class LottoConsumerTest {
     @DisplayName("전달받은_금액으로_살_수_있는_로또의_개수를_반환합니다")
     void 전달받은_금액으로_살_수_있는_로또의_개수를_반환합니다() {
         // given
-        int moeny = 2000;
+        int money = 2000;
 
         // when
         LottoConsumer consumer =  new LottoConsumer();
-        consumer.buyLotto(moeny);
+        consumer.buyLotto(money);
         List<LottoTicket> LottoTickets = consumer.getLottoTickets();
 
         // then
