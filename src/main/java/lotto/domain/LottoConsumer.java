@@ -6,21 +6,52 @@ import java.util.List;
 import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
 public class LottoConsumer {
-    /** 구매한 로또 티켓 목록 */
-    private final List<LottoTicket> lottoTickets = new ArrayList<>();
+    /** 자동 구매한 로또 티켓 목록 */
+    private final List<LottoTicket> autoLottoTickets = new ArrayList<>();
+
+    /** 수동 구매한 로또 티켓 목록 */
+    private final List<LottoTicket> manualLottoTickets = new ArrayList<>();
 
     /**
-     * 로또 번호 생성하고 반환 합니다.
+     * 자동 로또 티켓을 구매합니다.
      *
      * @param money 구매할 금액
      * */
     public void buyLotto(int money) {
         int purchasedCount = money / LOTTO_PRICE;
+        int autoPurchasedCount = purchasedCount - manualLottoTickets.size();
 
-        for (int i = 0; i < purchasedCount; i++) {
+        for (int i = 0; i < autoPurchasedCount; i++) {
             LottoGenerator generator = new LottoGenerator();
-            lottoTickets.add(new LottoTicket(generator.generate()));
+            autoLottoTickets.add(new LottoTicket(generator.generate()));
         }
+    }
+
+    /**
+     * 수동 로또 티켓을 구매합니다.
+     *
+     * @param lottoTickets 수동 로또 티켓 목록
+     * */
+    public void buyManualLotto(List<LottoTicket> lottoTickets) {
+        manualLottoTickets.addAll(lottoTickets);
+    }
+
+    /**
+     * 자동 로또 티켓 수 반환 합니다.
+     *
+     * @return int
+     * */
+    public int getAutoLottoTicketsCount() {
+        return autoLottoTickets.size();
+    }
+
+    /**
+     * 수동 로또 티켓 수 반환 합니다.
+     *
+     * @return int
+     * */
+    public int getManualLottoTicketsCount() {
+        return manualLottoTickets.size();
     }
 
     /**
@@ -29,6 +60,9 @@ public class LottoConsumer {
      * @return List<LottoTicket>
      * */
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        List<LottoTicket> allLottoTickets = new ArrayList<>(manualLottoTickets);
+        allLottoTickets.addAll(autoLottoTickets);
+
+        return allLottoTickets;
     }
 }

@@ -1,6 +1,8 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import static lotto.domain.LottoTicket.LOTTO_PRICE;
@@ -56,5 +58,47 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
 
         return scanner.nextInt();
+    }
+
+    /**
+     * 수동으로 구매할 로또 수를 입력 받아 반환 합니다.
+     *
+     * @return int
+     * */
+    public int inputManuallyPurchasedLottoTicketCount() {
+        int scanValue;
+
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        try {
+            Scanner scanner = new Scanner(System.in);
+            scanValue = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+        }
+
+        return scanValue;
+    }
+
+    /**
+     * 수동으로 구매할 로또 번호를 입력 받아 반환 합니다.
+     *
+     * @param purchasedCount 수동 로또 구매 수
+     * @return List<String[]>
+     * */
+    public List<String[]> inputManuallyPurchasedLottoTicketNumbers(int purchasedCount) {
+        List<String[]> numbers = new ArrayList<>();
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i=0 ; i < purchasedCount ; i++) {
+            String scanValue = scanner.nextLine();
+            numbers.add(scanValue
+                    .replace(" ", "")
+                    .split(","));
+        }
+
+        return numbers;
     }
 }

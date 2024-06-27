@@ -26,12 +26,28 @@ public class LottoApplication {
     public void run() {
         LottoConsumer consumer = new LottoConsumer();
 
-        // 로또 구매 금액 입력 및 구매
+        // 로또 구매 금액 입력
         int money = inputView.insertMoney();
+
+        // 수동 구매 로또 수 입력
+        int manuallyPurchasedLottoTicketCount = inputView.inputManuallyPurchasedLottoTicketCount();
+
+        if (manuallyPurchasedLottoTicketCount > 0) {
+            // 수동 로또 번호 입력
+            List<String[]> manuallyPurchasedLottoNumbers = inputView.inputManuallyPurchasedLottoTicketNumbers(manuallyPurchasedLottoTicketCount);
+
+            // 수동 로또 번호를 로또 티켓으로 변환
+            List<LottoTicket> manualLottoTickets = lottoService.manualNumbersToTickets(manuallyPurchasedLottoNumbers);
+
+            // 수동 로또 티켓 구매
+            lottoService.buyManualLotto(consumer, manualLottoTickets);
+        }
+
+        // 자동 티켓 구매
         lottoService.buyLotto(consumer, money);
 
         // 로또 구매 정보 출력
-        outputView.printLottoTicketsInformation(consumer.getLottoTickets());
+        outputView.printLottoTicketsInformation(consumer);
 
         // 지난 주 당첨번호 입력
         String[] LastWeekWinningNumbers = inputView.inputLastWeekWinningLottoNumbers();

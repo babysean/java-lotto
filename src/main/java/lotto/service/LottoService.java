@@ -32,6 +32,17 @@ public class LottoService {
     }
 
     /**
+     * 수동 로또 티켓을 구매합니다.
+     *
+     * @param consumer LottoConsumer
+     * @param manualLottoTickets 수동 로또 티켓 목록
+     * */
+    public void buyManualLotto(LottoConsumer consumer, List<LottoTicket> manualLottoTickets) {
+        consumer.buyManualLotto(manualLottoTickets);
+    }
+
+
+    /**
      * 지난 주 당첨 로또를 가공하여 LottoTicket 으로 만듭니다.
      *
      * @param numbers 지난 주 당첨 번호
@@ -46,6 +57,22 @@ public class LottoService {
         validator.winningNumbersValidation(lottoNumbers);
 
         return new LottoTicket(lottoNumbers);
+    }
+
+    /**
+     * 수동 로또 번호를 가공하여 List<LottoTicket> 으로 만듭니다.
+     *
+     * @param numbers 수동 로또 번호 목록
+     * @return List<LottoTicket>
+     * */
+    public List<LottoTicket> manualNumbersToTickets(List<String[]> numbers) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+
+        for (String[] number : numbers) {
+            manualLottoTickets.add(this.winningNumberToTicket(number));
+        }
+
+        return manualLottoTickets;
     }
 
     /**

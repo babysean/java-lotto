@@ -1,20 +1,19 @@
 package lotto.view;
 
+import lotto.domain.LottoConsumer;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
-
-import java.util.List;
 
 public class OutputView {
     /**
      * 로또 구매 개수와 로또 번호를 출력합니다.
      *
-     * @param lottoTickets 로또 티켓 목록
+     * @param consumer 로또 구매자
      * */
-    public void printLottoTicketsInformation(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+    public void printLottoTicketsInformation(LottoConsumer consumer) {
+        System.out.println("수동으로 " + consumer.getManualLottoTicketsCount() + "개, 자동으로 " + consumer.getAutoLottoTicketsCount() + "를 구매했습니다.");
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : consumer.getLottoTickets()) {
             System.out.println(lottoTicket.get());
         }
     }
