@@ -4,53 +4,61 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoCalculatorTest {
     @Test
-    @DisplayName("전달_받은_숫자만큼_일치하는_티켓의_개수를_반환합니다")
-    void 전달_받은_숫자만큼_일치하는_티켓의_개수를_반환합니다() {
+    @DisplayName("로또_티켓의_당첨_결과를_반환합니다")
+    void 로또_티켓의_당첨_결과를_반환합니다() {
         // given
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoTickets.add(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
-
-        LottoTicket winningLottoTicket = new LottoTicket(Arrays.asList(2, 3, 4, 5, 20, 21));
+        List<LottoPrize> result = new ArrayList<>();
+        result.add(LottoPrize.findByMatchesAndBonus(3, false));
+        result.add(LottoPrize.findByMatchesAndBonus(3, false));
+        result.add(LottoPrize.findByMatchesAndBonus(3, true));
+        result.add(LottoPrize.findByMatchesAndBonus(4, false));
+        result.add(LottoPrize.findByMatchesAndBonus(5, true));
+        result.add(LottoPrize.findByMatchesAndBonus(5, false));
 
         // when
         LottoCalculator calculator = new LottoCalculator();
-
-        List<Integer> matchingCount = calculator.calculate(lottoTickets, winningLottoTicket);
-
-        int count = calculator.getCountOfWin(matchingCount, 4);
+        int count = calculator.getCountOfWin(result, LottoPrize.THREE_MATCHES);
 
         // then
-        assertThat(count).isEqualTo(1);
+        assertThat(count).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("당첨금을_계산하여_반환합니다")
+    void 당첨금을_계산하여_반환합니다() {
+        // given
+        List<LottoPrize> result = new ArrayList<>();
+        result.add(LottoPrize.findByMatchesAndBonus(3, false));
+        result.add(LottoPrize.findByMatchesAndBonus(3, false));
+        result.add(LottoPrize.findByMatchesAndBonus(3, true));
+        result.add(LottoPrize.findByMatchesAndBonus(4, false));
+
+        // when
+        LottoCalculator calculator = new LottoCalculator();
+        int prizeMoney = calculator.getPrizeMoney(result);
+
+        // then
+        assertThat(prizeMoney).isEqualTo(65000);
     }
 
     @Test
     @DisplayName("수익률을_계산하여_반환합니다")
     void 수익률을_계산하여_반환합니다() {
         // given
+        int prizeMoney = 10000;
         int money = 2000;
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoTickets.add(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12)));
-
-        LottoTicket winningLottoTicket = new LottoTicket(Arrays.asList(2, 3, 4, 5, 20, 21));
 
         // when
         LottoCalculator calculator = new LottoCalculator();
-        List<Integer> matchingCount = calculator.calculate(lottoTickets, winningLottoTicket);
-
-        int prizeMoney = calculator.getPrizeMoney(matchingCount);
-
-        double rate = calculator.getProfit(prizeMoney, money);
+        double profit = calculator.getProfit(prizeMoney, money);
 
         // then
-        assertThat(rate).isEqualTo(25.0);
+        assertThat(profit).isEqualTo(5.0);
     }
 }

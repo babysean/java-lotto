@@ -3,20 +3,28 @@ package lotto.service;
 import lotto.domain.*;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoService {
     /** 로또 계산기 */
-    LottoCalculator calculator;
+    private final LottoCalculator calculator;
 
-    public LottoService(LottoCalculator calculator) {
+    /** 지난 주 당첨 번호 유효성 검사기 */
+    private final LastWeekLottoValidator validator;
+
+    public LottoService(LottoCalculator calculator, LastWeekLottoValidator validator) {
         this.calculator = calculator;
+        this.validator = validator;
     }
 
     /**
      * 로또 티켓을 구매합니다.
      *
-     * @param consumer LottoConsumer
+     * @param consumer 로또 구매자 객체
      * @param money 구매 금액
      * */
     public void buyLotto(LottoConsumer consumer, int money) {
@@ -30,11 +38,14 @@ public class LottoService {
      * @return LottoTicket
      * */
     public LottoTicket winningNumberToTicket(String[] numbers) {
-        // 유효성 체크
-        LastWeekLottoValidator validator = new LastWeekLottoValidator();
-        validator.validate(numbers);
+        List<Integer> lottoNumbers = Arrays.stream(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
 
-        return new LottoTicket(numbers);
+        // 유효성 체크
+        validator.winningNumbersValidation(lottoNumbers);
+
+        return new LottoTicket(lottoNumbers);
     }
 
     /**
@@ -42,33 +53,52 @@ public class LottoService {
      *
      * @param lottoTickets 구매한 로또 티켓
      * @param winningTicket 지난 주 당첨 로또 티켓
-     * @return List<Integer>
+     * @param bonusNumber 보너스 번호
+     * @return List<LottoPrize>
      * */
-    public List<Integer> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        return calculator.calculate(lottoTickets, winningTicket);
+    public List<LottoPrize> calculate(List<LottoTicket> lottoTickets, LottoTicket winningTicket, int bonusNumber) {
+        List<LottoPrize> winningResult = new ArrayList<>();
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoPrize result = lottoTicket.win(winningTicket, bonusNumber);
+            winningResult.add(result);
+        }
+
+        this.removeNullList(winningResult);
+
+        return winningResult;
+    }
+
+    /**
+     * List<LottoPrize> 에서 null 값을 제거 합니다.
+     *
+     * @param lottoPrizes 로또 맞춘 결과 목록
+     * */
+    private void removeNullList(List<LottoPrize> lottoPrizes) {
+        lottoPrizes.removeIf(Objects::isNull);
     }
 
     /**
      * 로또 결과 출력을 위한 데이터를 생성 합니다.
      * 반복하여 view 에 결과를 전달하여 텍스트를 출력합니다.
      *
-     * @param matchingCounts 일치하는 숫자의 개수 목록
+     * @param prizes 로또 결과 객체 목록
      * @param view 결과 view instance
      * */
-    public void printWinningInformation(List<Integer> matchingCounts, OutputView view) {
+    public void printWinningInformation(List<LottoPrize> prizes, OutputView view) {
         for (LottoPrize prize : LottoPrize.values()) {
-            view.printWinningInformation(prize, calculator.getCountOfWin(matchingCounts, prize.getMatches()));
+            view.printWinningInformation(prize, calculator.getCountOfWin(prizes, prize));
         }
     }
 
     /**
      * 로또 수익률을 계산 합니다.
      *
-     * @param matchingCounts 일치하는 숫자의 개수 목록
+     * @param prizes 로또 결과 객체 목록
      * @param money 구매 금액
      * */
-    public Double getProfit(List<Integer> matchingCounts, int money) {
-        int prizeMoney = calculator.getPrizeMoney(matchingCounts);
+    public Double getProfit(List<LottoPrize> prizes, int money) {
+        int prizeMoney = calculator.getPrizeMoney(prizes);
 
         return calculator.getProfit(prizeMoney, money);
     }

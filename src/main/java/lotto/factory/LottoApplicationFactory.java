@@ -1,6 +1,7 @@
 package lotto.factory;
 
 import lotto.LottoApplication;
+import lotto.domain.LastWeekLottoValidator;
 import lotto.domain.LottoCalculator;
 import lotto.service.LottoService;
 import lotto.view.InputView;
@@ -17,7 +18,9 @@ public class LottoApplicationFactory {
 
     private LottoService createLottoService() {
         LottoCalculator calculator = new LottoCalculator();
-        return new LottoService(calculator);
+        LastWeekLottoValidator validator = new LastWeekLottoValidator();
+
+        return new LottoService(calculator, validator);
     }
 
     /** LottoApplication 파라미터 생성을 위한 Factory */

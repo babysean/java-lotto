@@ -36,15 +36,25 @@ public class InputView {
      * @return String[]
      * */
     public String[] inputLastWeekWinningLottoNumbers() {
-        String scanValue;
-
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
 
-        scanValue = scanner.nextLine();
+        String scanValue = scanner.nextLine();
 
         return scanValue
                 .replace(" ", "")
                 .split(",");
+    }
+
+    /**
+     * 보너스 볼을 입력 받아 반환 합니다.
+     *
+     * @return int
+     * */
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextInt();
     }
 }

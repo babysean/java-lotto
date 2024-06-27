@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoConsumer;
+import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import lotto.factory.LottoApplicationFactory;
 import lotto.service.LottoService;
@@ -34,17 +35,22 @@ public class LottoApplication {
 
         // 지난 주 당첨번호 입력
         String[] LastWeekWinningNumbers = inputView.inputLastWeekWinningLottoNumbers();
+
+        // 지난 주 보너스 번호 입력
+        int bonusNumber = inputView.inputBonusNumber();
+
+        // 지난 주 당첨 티켓 생성
         LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
 
-        // 로또 계산
-        List<Integer> winningCounts = lottoService.calculate(consumer.getLottoTickets(), winningTicket);
+        // 맞춘 번호 개수와 맞춘 보너스 번호 결과
+        List<LottoPrize> winningResult = lottoService.calculate(consumer.getLottoTickets(), winningTicket, bonusNumber);
 
         // 로또 결과 출력
         outputView.printResultTitle();
-        lottoService.printWinningInformation(winningCounts, outputView);
+        lottoService.printWinningInformation(winningResult, outputView);
 
         // 수익률 출력
-        double profit = lottoService.getProfit(winningCounts, money);
+        double profit = lottoService.getProfit(winningResult, money);
         outputView.printProfit(profit);
     }
 
