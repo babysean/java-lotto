@@ -1,13 +1,13 @@
 package lotto.domain;
 
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-
 class LottoGeneratorTest {
+
     @Test
     @DisplayName("로또_번호는_6개_입니다")
     void 로또_번호는_6개_입니다() {
@@ -29,8 +29,7 @@ class LottoGeneratorTest {
 
         // when
         List<Integer> numbers = generator.generate();
-        long count = numbers
-                .stream()
+        long count = numbers.stream()
                 .distinct()
                 .count();
 

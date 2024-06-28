@@ -1,15 +1,15 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @DisplayName("지난 주 당첨 로또 번호의 유효성을 테스트 합니다.")
 class LastWeekLottoValidatorTest {
+
     @Test
     @DisplayName("지난_주_당첨_번호는_6개의_숫자입니다")
     void 지난_주_당첨_번호는_6개의_숫자입니다() {
@@ -20,8 +20,7 @@ class LastWeekLottoValidatorTest {
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();
 
         // then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lastWeekLottoValidator.winningNumbersValidation(numbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.winningNumbersValidation(numbers));
     }
 
     @Test
@@ -34,8 +33,7 @@ class LastWeekLottoValidatorTest {
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();
 
         // then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lastWeekLottoValidator.winningNumbersValidation(numbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.winningNumbersValidation(numbers));
     }
 
     @Test
@@ -48,8 +46,7 @@ class LastWeekLottoValidatorTest {
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();
 
         // then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lastWeekLottoValidator.winningNumbersValidation(numbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.winningNumbersValidation(numbers));
     }
 
     @Test
@@ -63,7 +60,6 @@ class LastWeekLottoValidatorTest {
         LastWeekLottoValidator lastWeekLottoValidator = new LastWeekLottoValidator();
 
         // then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lastWeekLottoValidator.bonusNumberValidation(numbers, bonusNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> lastWeekLottoValidator.bonusNumberValidation(numbers, bonusNumber));
     }
 }

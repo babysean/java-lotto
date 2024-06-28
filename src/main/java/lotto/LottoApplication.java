@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.LottoConsumer;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
@@ -8,9 +9,8 @@ import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class LottoApplication {
+
     private final InputView inputView;
 
     private final OutputView outputView;

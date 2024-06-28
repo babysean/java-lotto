@@ -1,15 +1,15 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoConsumerTest {
+
     @Test
     @DisplayName("전달받은_금액으로_살_수_있는_로또의_개수를_반환합니다")
     void 전달받은_금액으로_살_수_있는_로또의_개수를_반환합니다() {
@@ -17,7 +17,7 @@ class LottoConsumerTest {
         int money = 2000;
 
         // when
-        LottoConsumer consumer =  new LottoConsumer();
+        LottoConsumer consumer = new LottoConsumer();
         consumer.buyLotto(money);
         List<LottoTicket> LottoTickets = consumer.getLottoTickets();
 
@@ -37,7 +37,7 @@ class LottoConsumerTest {
         LottoTickets.add(lottoTicket_2);
 
         // when
-        LottoConsumer consumer =  new LottoConsumer();
+        LottoConsumer consumer = new LottoConsumer();
         consumer.buyManualLotto(LottoTickets);
 
         // then
@@ -51,7 +51,7 @@ class LottoConsumerTest {
         int money = 3000;
 
         // when
-        LottoConsumer consumer =  new LottoConsumer();
+        LottoConsumer consumer = new LottoConsumer();
         consumer.buyLotto(money);
 
         // then

@@ -8,6 +8,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoApplicationFactory {
+
     private InputView createInputView() {
         return new InputView();
     }

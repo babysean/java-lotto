@@ -1,14 +1,14 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoCalculatorTest {
+
     @Test
     @DisplayName("로또_티켓의_당첨_결과를_반환합니다")
     void 로또_티켓의_당첨_결과를_반환합니다() {

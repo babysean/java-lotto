@@ -35,10 +35,11 @@ public enum LottoPrize {
     /**
      * matches 와 bonus 에 맞는 값을 반환 합니다.
      *
-     * @param matches 맞춘 개수
+     * @param matches          맞춘 개수
      * @param isWonBonusNumber 보너스 번호 맞춘 여부
+     *
      * @return LottoPrize
-     * */
+     */
     public static LottoPrize findByMatchesAndBonus(int matches, boolean isWonBonusNumber) {
         return Arrays.stream(values())
                 .filter(prize -> isMatched(prize, matches, isWonBonusNumber))
@@ -49,11 +50,12 @@ public enum LottoPrize {
     /**
      * 로또 티켓을 확인 합니다.
      *
-     * @param prize 로또 티켓의 결과
-     * @param checkedCount 확인할 맞춘 개수
+     * @param prize            로또 티켓의 결과
+     * @param checkedCount     확인할 맞춘 개수
      * @param isWonBonusNumber 보너스 번호 맞춘 여부
+     *
      * @return boolean
-     * */
+     */
     public static boolean isMatched(LottoPrize prize, int checkedCount, boolean isWonBonusNumber) {
         if (checkedCount == SECOND_MATCHED_COUNT) {
             return checkSecond(prize, checkedCount, isWonBonusNumber);
@@ -65,11 +67,12 @@ public enum LottoPrize {
     /**
      * 로또 티켓의 2등을 확인합니다.
      *
-     * @param prize 로또 티켓의 결과
-     * @param checkedCount 확인할 맞춘 개수
+     * @param prize                로또 티켓의 결과
+     * @param checkedCount         확인할 맞춘 개수
      * @param isMatchedBonusNumber 보너스 번호 맞춘 여부
+     *
      * @return boolean
-     * */
+     */
     private static boolean checkSecond(LottoPrize prize, int checkedCount, boolean isMatchedBonusNumber) {
         if (isMatchedBonusNumber) {
             return prize.getIsWonBonusNumber() && prize.getMatches() == checkedCount;
