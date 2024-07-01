@@ -43,11 +43,10 @@ public class LottoService {
         consumer.buyManualLotto(manualLottoTickets);
     }
 
-
     /**
      * 로또 번호를 가공하여 LottoTicket 으로 만듭니다.
      *
-     * @param numbers 지난 주 당첨 번호
+     * @param numbers 로또 번호
      *
      * @return LottoTicket
      */
