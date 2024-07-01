@@ -56,7 +56,7 @@ public class LottoApplication {
         int bonusNumber = inputView.inputBonusNumber();
 
         // 지난 주 당첨 티켓 생성
-        LottoTicket winningTicket = lottoService.winningNumberToTicket(LastWeekWinningNumbers);
+        LottoTicket winningTicket = lottoService.lottoNumberToTicket(LastWeekWinningNumbers);
 
         // 맞춘 번호 개수와 맞춘 보너스 번호 결과
         List<LottoPrize> winningResult = lottoService.calculate(consumer.getLottoTickets(), winningTicket, bonusNumber);

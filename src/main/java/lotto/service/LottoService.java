@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.domain.LastWeekLottoValidator;
 import lotto.domain.LottoCalculator;
 import lotto.domain.LottoConsumer;
+import lotto.domain.LottoNumberValidator;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import lotto.view.OutputView;
@@ -17,10 +17,10 @@ public class LottoService {
     /** 로또 계산기 */
     private final LottoCalculator calculator;
 
-    /** 지난 주 당첨 번호 유효성 검사기 */
-    private final LastWeekLottoValidator validator;
+    /** 로또 번호 유효성 검사기 */
+    private final LottoNumberValidator validator;
 
-    public LottoService(LottoCalculator calculator, LastWeekLottoValidator validator) {
+    public LottoService(LottoCalculator calculator, LottoNumberValidator validator) {
         this.calculator = calculator;
         this.validator = validator;
     }
@@ -47,13 +47,13 @@ public class LottoService {
 
 
     /**
-     * 지난 주 당첨 로또를 가공하여 LottoTicket 으로 만듭니다.
+     * 로또 번호를 가공하여 LottoTicket 으로 만듭니다.
      *
      * @param numbers 지난 주 당첨 번호
      *
      * @return LottoTicket
      */
-    public LottoTicket winningNumberToTicket(String[] numbers) {
+    public LottoTicket lottoNumberToTicket(String[] numbers) {
         List<Integer> lottoNumbers = Arrays.stream(numbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -75,7 +75,7 @@ public class LottoService {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
 
         for (String[] number : numbers) {
-            manualLottoTickets.add(this.winningNumberToTicket(number));
+            manualLottoTickets.add(this.lottoNumberToTicket(number));
         }
 
         return manualLottoTickets;
