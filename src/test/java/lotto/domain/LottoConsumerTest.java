@@ -36,8 +36,9 @@ class LottoConsumerTest {
         LottoTickets.add(lottoTicket_1);
         LottoTickets.add(lottoTicket_2);
 
-        // when
         LottoConsumer consumer = new LottoConsumer();
+
+        // when
         consumer.buyManualLotto(LottoTickets);
 
         // then
