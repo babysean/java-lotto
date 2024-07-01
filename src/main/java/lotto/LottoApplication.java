@@ -36,11 +36,8 @@ public class LottoApplication {
             // 수동 로또 번호 입력
             List<String[]> manuallyPurchasedLottoNumbers = inputView.inputManuallyPurchasedLottoTicketNumbers(manuallyPurchasedLottoTicketCount);
 
-            // 수동 로또 번호를 로또 티켓으로 변환
-            List<LottoTicket> manualLottoTickets = lottoService.manualNumbersToTickets(manuallyPurchasedLottoNumbers);
-
             // 수동 로또 티켓 구매
-            lottoService.buyManualLotto(consumer, manualLottoTickets);
+            lottoService.buyManualLotto(consumer, manuallyPurchasedLottoNumbers);
         }
 
         // 자동 티켓 구매

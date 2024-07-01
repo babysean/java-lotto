@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,12 +28,12 @@ class LottoConsumerTest {
     @DisplayName("수동_로또_티켓을_구매_합니다")
     void 수동_로또_티켓을_구매_합니다() {
         // given
-        LottoTicket lottoTicket_1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket_2 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        String[] lottoNumber_1 = {"1", "2", "3", "4", "5", "6"};
+        String[] lottoNumber_2 = {"1", "2", "3", "4", "5", "6"};
 
-        List<LottoTicket> LottoTickets = new ArrayList<>();
-        LottoTickets.add(lottoTicket_1);
-        LottoTickets.add(lottoTicket_2);
+        List<String[]> LottoTickets = new ArrayList<>();
+        LottoTickets.add(lottoNumber_1);
+        LottoTickets.add(lottoNumber_2);
 
         LottoConsumer consumer = new LottoConsumer();
 

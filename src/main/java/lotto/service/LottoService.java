@@ -36,11 +36,11 @@ public class LottoService {
     /**
      * 수동 로또 티켓을 구매합니다.
      *
-     * @param consumer           LottoConsumer
-     * @param manualLottoTickets 수동 로또 티켓 목록
+     * @param consumer     LottoConsumer
+     * @param lottoNumbers 로또 번호 목록
      */
-    public void buyManualLotto(LottoConsumer consumer, List<LottoTicket> manualLottoTickets) {
-        consumer.buyManualLotto(manualLottoTickets);
+    public void buyManualLotto(LottoConsumer consumer, List<String[]> lottoNumbers) {
+        consumer.buyManualLotto(lottoNumbers);
     }
 
     /**
@@ -52,23 +52,6 @@ public class LottoService {
      */
     public LottoTicket lottoNumberToTicket(String[] numbers) {
         return generator.manualGenerate(numbers);
-    }
-
-    /**
-     * 수동 로또 번호를 가공하여 List<LottoTicket> 으로 만듭니다.
-     *
-     * @param numbers 수동 로또 번호 목록
-     *
-     * @return List<LottoTicket>
-     */
-    public List<LottoTicket> manualNumbersToTickets(List<String[]> numbers) {
-        List<LottoTicket> manualLottoTickets = new ArrayList<>();
-
-        for (String[] number : numbers) {
-            manualLottoTickets.add(generator.manualGenerate(number));
-        }
-
-        return manualLottoTickets;
     }
 
     /**

@@ -19,11 +19,12 @@ public class LottoConsumer {
      * @param money 구매할 금액
      */
     public void buyLotto(int money) {
+        LottoGenerator generator = new LottoGenerator();
+
         int purchasedCount = money / LOTTO_PRICE;
         int autoPurchasedCount = purchasedCount - manualLottoCount;
 
         for (int i = 0 ; i < autoPurchasedCount ; i++) {
-            LottoGenerator generator = new LottoGenerator();
             lottoTickets.add(generator.autoGenerate());
         }
     }
@@ -31,11 +32,16 @@ public class LottoConsumer {
     /**
      * 수동 로또 티켓을 구매합니다.
      *
-     * @param lottoTickets 수동 로또 티켓 목록
+     * @param lottoNumbers 수동 로또 티켓 목록
      */
-    public void buyManualLotto(List<LottoTicket> lottoTickets) {
-        this.lottoTickets.addAll(lottoTickets);
-        manualLottoCount = lottoTickets.size();
+    public void buyManualLotto(List<String[]> lottoNumbers) {
+        manualLottoCount = lottoNumbers.size();
+
+        LottoGenerator generator = new LottoGenerator();
+
+        for (String[] lottoNumber : lottoNumbers) {
+            lottoTickets.add(generator.manualGenerate(lottoNumber));
+        }
     }
 
     /**
