@@ -41,7 +41,7 @@ class LottoConsumerTest {
         consumer.buyManualLotto(LottoTickets);
 
         // then
-        assertThat(consumer.getManualLottoTicketsCount()).isEqualTo(2);
+        assertThat(consumer.getManualLottoTicketCount()).isEqualTo(2);
     }
 
     @Test
@@ -55,6 +55,6 @@ class LottoConsumerTest {
         consumer.buyLotto(money);
 
         // then
-        assertThat(consumer.getAutoLottoTicketsCount()).isEqualTo(3);
+        assertThat(consumer.getAutoLottoTicketCount()).isEqualTo(3);
     }
 }
