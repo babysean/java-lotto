@@ -1,13 +1,11 @@
 package lotto.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import lotto.domain.LottoCalculator;
 import lotto.domain.LottoConsumer;
-import lotto.domain.LottoNumberValidator;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import lotto.view.OutputView;
@@ -17,12 +15,12 @@ public class LottoService {
     /** 로또 계산기 */
     private final LottoCalculator calculator;
 
-    /** 로또 번호 유효성 검사기 */
-    private final LottoNumberValidator validator;
+    /** 로또 번호 생성기 */
+    private final LottoGenerator generator;
 
-    public LottoService(LottoCalculator calculator, LottoNumberValidator validator) {
+    public LottoService(LottoCalculator calculator, LottoGenerator generator) {
         this.calculator = calculator;
-        this.validator = validator;
+        this.generator = generator;
     }
 
     /**
@@ -54,14 +52,7 @@ public class LottoService {
      * @return LottoTicket
      */
     public LottoTicket lottoNumberToTicket(String[] numbers) {
-        List<Integer> lottoNumbers = Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        // 유효성 체크
-        validator.winningNumbersValidation(lottoNumbers);
-
-        return new LottoTicket(lottoNumbers);
+        return generator.manualGenerate(numbers);
     }
 
     /**
@@ -75,7 +66,7 @@ public class LottoService {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
 
         for (String[] number : numbers) {
-            manualLottoTickets.add(this.lottoNumberToTicket(number));
+            manualLottoTickets.add(generator.manualGenerate(number));
         }
 
         return manualLottoTickets;

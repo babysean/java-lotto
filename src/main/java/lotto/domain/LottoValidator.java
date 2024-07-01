@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 로또 번호의 유효성을 체크하는 클래스입니다.
  */
-public class LottoNumberValidator {
+public class LottoValidator {
 
     /** 로또 티켓의 숫자 개수 */
     public static final int LOTTO_NUMBER_SIZE = 6;

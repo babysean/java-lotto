@@ -2,7 +2,7 @@ package lotto.factory;
 
 import lotto.LottoApplication;
 import lotto.domain.LottoCalculator;
-import lotto.domain.LottoNumberValidator;
+import lotto.domain.LottoGenerator;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,9 +19,9 @@ public class LottoApplicationFactory {
 
     private LottoService createLottoService() {
         LottoCalculator calculator = new LottoCalculator();
-        LottoNumberValidator validator = new LottoNumberValidator();
+        LottoGenerator generator = new LottoGenerator();
 
-        return new LottoService(calculator, validator);
+        return new LottoService(calculator, generator);
     }
 
     /** LottoApplication 파라미터 생성을 위한 Factory */

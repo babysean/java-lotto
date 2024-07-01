@@ -17,7 +17,7 @@ class LottoNumberValidatorTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
         // when
-        LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
+        LottoValidator lottoNumberValidator = new LottoValidator();
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> lottoNumberValidator.winningNumbersValidation(numbers));
@@ -30,7 +30,7 @@ class LottoNumberValidatorTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 70);
 
         // when
-        LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
+        LottoValidator lottoNumberValidator = new LottoValidator();
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> lottoNumberValidator.winningNumbersValidation(numbers));
@@ -43,7 +43,7 @@ class LottoNumberValidatorTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 5);
 
         // when
-        LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
+        LottoValidator lottoNumberValidator = new LottoValidator();
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> lottoNumberValidator.winningNumbersValidation(numbers));
@@ -57,7 +57,7 @@ class LottoNumberValidatorTest {
         int bonusNumber = 6;
 
         // when
-        LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
+        LottoValidator lottoNumberValidator = new LottoValidator();
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> lottoNumberValidator.bonusNumberValidation(numbers, bonusNumber));

@@ -24,7 +24,7 @@ public class LottoConsumer {
 
         for (int i = 0 ; i < autoPurchasedCount ; i++) {
             LottoGenerator generator = new LottoGenerator();
-            lottoTickets.add(new LottoTicket(generator.generate()));
+            lottoTickets.add(generator.autoGenerate());
         }
     }
 

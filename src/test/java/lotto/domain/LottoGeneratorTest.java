@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +14,11 @@ class LottoGeneratorTest {
         LottoGenerator generator = new LottoGenerator();
 
         // when
-        List<Integer> numbers = generator.generate();
+        LottoTicket lottoTicket = generator.autoGenerate();
 
         // then
-        assertThat(numbers).hasSize(6);
+        assertThat(lottoTicket.get()
+                .size()).isEqualTo(6);
     }
 
     @Test
@@ -28,8 +28,10 @@ class LottoGeneratorTest {
         LottoGenerator generator = new LottoGenerator();
 
         // when
-        List<Integer> numbers = generator.generate();
-        long count = numbers.stream()
+        LottoTicket lottoTicket = generator.autoGenerate();
+
+        long count = lottoTicket.get()
+                .stream()
                 .distinct()
                 .count();
 
