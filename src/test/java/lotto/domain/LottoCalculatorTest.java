@@ -14,19 +14,16 @@ class LottoCalculatorTest {
     void 로또_티켓의_당첨_결과를_반환합니다() {
         // given
         List<LottoPrize> result = new ArrayList<>();
-        result.add(LottoPrize.findByMatchesAndBonus(3, false));
-        result.add(LottoPrize.findByMatchesAndBonus(3, false));
-        result.add(LottoPrize.findByMatchesAndBonus(3, true));
-        result.add(LottoPrize.findByMatchesAndBonus(4, false));
-        result.add(LottoPrize.findByMatchesAndBonus(5, true));
-        result.add(LottoPrize.findByMatchesAndBonus(5, false));
+        result.add(LottoPrize.THREE_MATCHES);
+        result.add(LottoPrize.THREE_MATCHES);
+        result.add(LottoPrize.FIVE_MATCHES);
 
         // when
         LottoCalculator calculator = new LottoCalculator();
         int count = calculator.getCountOfWin(result, LottoPrize.THREE_MATCHES);
 
         // then
-        assertThat(count).isEqualTo(3);
+        assertThat(count).isEqualTo(2);
     }
 
     @Test
@@ -34,17 +31,15 @@ class LottoCalculatorTest {
     void 당첨금을_계산하여_반환합니다() {
         // given
         List<LottoPrize> result = new ArrayList<>();
-        result.add(LottoPrize.findByMatchesAndBonus(3, false));
-        result.add(LottoPrize.findByMatchesAndBonus(3, false));
-        result.add(LottoPrize.findByMatchesAndBonus(3, true));
-        result.add(LottoPrize.findByMatchesAndBonus(4, false));
+        result.add(LottoPrize.THREE_MATCHES);
+        result.add(LottoPrize.FOUR_MATCHES);
 
         // when
         LottoCalculator calculator = new LottoCalculator();
         int prizeMoney = calculator.getPrizeMoney(result);
 
         // then
-        assertThat(prizeMoney).isEqualTo(65000);
+        assertThat(prizeMoney).isEqualTo(55_000);
     }
 
     @Test
