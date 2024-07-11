@@ -24,13 +24,13 @@ public class LottoApplication {
     }
 
     public void run() {
-        LottoConsumer consumer = new LottoConsumer();
-
         // 로또 구매 금액 입력
         int money = inputView.insertMoney();
 
         // 수동 구매 로또 수 입력
         int manuallyPurchasedLottoTicketCount = inputView.inputManuallyPurchasedLottoTicketCount();
+
+        LottoConsumer consumer = new LottoConsumer(manuallyPurchasedLottoTicketCount);
 
         if (manuallyPurchasedLottoTicketCount > 0) {
             // 수동 로또 번호 입력

@@ -8,10 +8,15 @@ import java.util.List;
 public class LottoConsumer {
 
     /** 구매한 로또 티켓 목록 */
-    private final List<LottoTicket> lottoTickets = new ArrayList<>();
+    private final List<LottoTicket> lottoTickets;
 
     /** 수동 로또 구매 개수 */
-    private int manualLottoCount = 0;
+    private final int manualLottoCount;
+
+    public LottoConsumer(int manualLottoCount) {
+        this.lottoTickets = new ArrayList<>();
+        this.manualLottoCount = manualLottoCount;
+    }
 
     /**
      * 자동 로또 티켓을 구매합니다.
@@ -35,8 +40,6 @@ public class LottoConsumer {
      * @param lottoNumbers 수동 로또 티켓 목록
      */
     public void buyManualLotto(List<String[]> lottoNumbers) {
-        manualLottoCount = lottoNumbers.size();
-
         LottoGenerator generator = new LottoGenerator();
 
         for (String[] lottoNumber : lottoNumbers) {
