@@ -8,6 +8,8 @@ import lotto.domain.LottoConsumer;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketGenerator;
+import lotto.domain.purchaseStrategy.PurchaseStrategy;
+import lotto.dto.LottoPurchaseDto;
 import lotto.view.OutputView;
 
 public class LottoService {
@@ -18,29 +20,29 @@ public class LottoService {
     /** 로또 번호 생성기 */
     private final LottoTicketGenerator generator;
 
+    /** 로또 구매 전략 */
+    private PurchaseStrategy strategy;
+
     public LottoService(LottoCalculator calculator, LottoTicketGenerator generator) {
         this.calculator = calculator;
         this.generator = generator;
     }
 
     /**
-     * 로또 티켓을 구매합니다.
-     *
-     * @param consumer 로또 구매자 객체
-     * @param money    구매 금액
+     * 구매 전략 세팅
      */
-    public void buyLotto(LottoConsumer consumer, int money) {
-        consumer.buyLotto(money, generator);
+    public void setPurchaseStrategy(PurchaseStrategy strategy) {
+        this.strategy = strategy;
     }
 
     /**
-     * 수동 로또 티켓을 구매합니다.
+     * 로또 티켓을 구매합니다.
      *
-     * @param consumer     LottoConsumer
-     * @param lottoNumbers 로또 번호 목록
+     * @param consumer 구매자
+     * @param dto      구매정보 DTO
      */
-    public void buyManualLotto(LottoConsumer consumer, List<String[]> lottoNumbers) {
-        consumer.buyManualLotto(lottoNumbers, generator);
+    public void buyLottoTicket(LottoConsumer consumer, LottoPurchaseDto dto) {
+        strategy.buyLottoTicket(consumer, dto, generator);
     }
 
     /**

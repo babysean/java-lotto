@@ -12,7 +12,7 @@ public class OutputView {
      * @param consumer 로또 구매자
      */
     public void printLottoTicketsInformation(LottoConsumer consumer) {
-        System.out.println("수동으로 " + consumer.getManualLottoTicketCount() + "개, 자동으로 " + consumer.getAutoLottoTicketCount() + "를 구매했습니다.");
+        System.out.println("수동으로 " + consumer.getManualTicketCount() + "개, 자동으로 " + consumer.getAutoTicketCount() + "를 구매했습니다.");
 
         for (LottoTicket lottoTicket : consumer.getLottoTickets()) {
             System.out.println(lottoTicket.get());

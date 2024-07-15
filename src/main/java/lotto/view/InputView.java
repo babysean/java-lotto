@@ -88,6 +88,10 @@ public class InputView {
      * @return List<String [ ]>
      */
     public List<String[]> inputManuallyPurchasedLottoTicketNumbers(int purchasedCount) {
+        if (purchasedCount < 1) {
+            return null;
+        }
+
         List<String[]> numbers = new ArrayList<>();
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");

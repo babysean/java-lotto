@@ -4,6 +4,9 @@ import java.util.List;
 import lotto.domain.LottoConsumer;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
+import lotto.domain.purchaseStrategy.AutoStrategy;
+import lotto.domain.purchaseStrategy.ManualStrategy;
+import lotto.dto.LottoPurchaseDto;
 import lotto.factory.LottoApplicationFactory;
 import lotto.service.LottoService;
 import lotto.view.InputView;
@@ -24,24 +27,31 @@ public class LottoApplication {
     }
 
     public void run() {
+        LottoConsumer consumer = new LottoConsumer();
+
         // 로또 구매 금액 입력
         int money = inputView.insertMoney();
 
         // 수동 구매 로또 수 입력
         int manuallyPurchasedLottoTicketCount = inputView.inputManuallyPurchasedLottoTicketCount();
 
-        LottoConsumer consumer = new LottoConsumer();
+        // 수동 로또 번호 입력
+        List<String[]> manuallyPurchasedLottoNumbers = inputView.inputManuallyPurchasedLottoTicketNumbers(manuallyPurchasedLottoTicketCount);
 
-        if (manuallyPurchasedLottoTicketCount > 0) {
-            // 수동 로또 번호 입력
-            List<String[]> manuallyPurchasedLottoNumbers = inputView.inputManuallyPurchasedLottoTicketNumbers(manuallyPurchasedLottoTicketCount);
+        // 구매 정보 DTO
+        LottoPurchaseDto purchaseDto = new LottoPurchaseDto(money, manuallyPurchasedLottoNumbers);
 
-            // 수동 로또 티켓 구매
-            lottoService.buyManualLotto(consumer, manuallyPurchasedLottoNumbers);
-        }
+        // 수동 구매로 전략 변경
+        lottoService.setPurchaseStrategy(new ManualStrategy());
 
-        // 자동 티켓 구매
-        lottoService.buyLotto(consumer, money);
+        // 수동 로또 티켓 구매
+        lottoService.buyLottoTicket(consumer, purchaseDto);
+
+        // 자동 구매로 전략 변경
+        lottoService.setPurchaseStrategy(new AutoStrategy());
+
+        // 자동 로또 티켓 구매
+        lottoService.buyLottoTicket(consumer, purchaseDto);
 
         // 로또 구매 정보 출력
         outputView.printLottoTicketsInformation(consumer);
