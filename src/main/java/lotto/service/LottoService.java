@@ -30,7 +30,7 @@ public class LottoService {
      * @param money    구매 금액
      */
     public void buyLotto(LottoConsumer consumer, int money) {
-        consumer.buyLotto(money);
+        consumer.buyLotto(money, generator);
     }
 
     /**
@@ -40,7 +40,7 @@ public class LottoService {
      * @param lottoNumbers 로또 번호 목록
      */
     public void buyManualLotto(LottoConsumer consumer, List<String[]> lottoNumbers) {
-        consumer.buyManualLotto(lottoNumbers);
+        consumer.buyManualLotto(lottoNumbers, generator);
     }
 
     /**
