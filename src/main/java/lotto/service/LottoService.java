@@ -30,6 +30,8 @@ public class LottoService {
 
     /**
      * 구매 전략 세팅
+     *
+     * @param strategy 구매 전략 (방법)
      */
     public void setPurchaseStrategy(PurchaseStrategy strategy) {
         this.strategy = strategy;
