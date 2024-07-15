@@ -30,7 +30,7 @@ public class LottoApplication {
         // 수동 구매 로또 수 입력
         int manuallyPurchasedLottoTicketCount = inputView.inputManuallyPurchasedLottoTicketCount();
 
-        LottoConsumer consumer = new LottoConsumer(manuallyPurchasedLottoTicketCount);
+        LottoConsumer consumer = new LottoConsumer();
 
         if (manuallyPurchasedLottoTicketCount > 0) {
             // 수동 로또 번호 입력

@@ -16,7 +16,7 @@ class LottoConsumerTest {
         int money = 2000;
 
         // when
-        LottoConsumer consumer = new LottoConsumer(0);
+        LottoConsumer consumer = new LottoConsumer();
         consumer.buyLotto(money);
         List<LottoTicket> LottoTickets = consumer.getLottoTickets();
 
@@ -35,7 +35,7 @@ class LottoConsumerTest {
         LottoTickets.add(lottoNumber_1);
         LottoTickets.add(lottoNumber_2);
 
-        LottoConsumer consumer = new LottoConsumer(2);
+        LottoConsumer consumer = new LottoConsumer();
 
         // when
         consumer.buyManualLotto(LottoTickets);
@@ -51,7 +51,7 @@ class LottoConsumerTest {
         int money = 3000;
 
         // when
-        LottoConsumer consumer = new LottoConsumer(0);
+        LottoConsumer consumer = new LottoConsumer();
         consumer.buyLotto(money);
 
         // then

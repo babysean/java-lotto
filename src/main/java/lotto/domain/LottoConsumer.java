@@ -11,11 +11,10 @@ public class LottoConsumer {
     private final List<LottoTicket> lottoTickets;
 
     /** 수동 로또 구매 개수 */
-    private final int manualLottoCount;
+    private int manualLottoCount = 0;
 
-    public LottoConsumer(int manualLottoCount) {
+    public LottoConsumer() {
         this.lottoTickets = new ArrayList<>();
-        this.manualLottoCount = manualLottoCount;
     }
 
     /**
@@ -45,6 +44,9 @@ public class LottoConsumer {
         for (String[] lottoNumber : lottoNumbers) {
             lottoTickets.add(generator.manualGenerate(lottoNumber));
         }
+
+        // 수동 로또 티켓 수 저장
+        manualLottoCount = lottoNumbers.size();
     }
 
     /**

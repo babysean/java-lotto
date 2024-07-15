@@ -21,7 +21,7 @@ class LottoServiceTest {
         // given
         int money = 4_000;
 
-        LottoConsumer consumer = new LottoConsumer(0);
+        LottoConsumer consumer = new LottoConsumer();
         LottoCalculator calculator = new LottoCalculator();
         LottoGenerator generator = new LottoGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
@@ -45,7 +45,7 @@ class LottoServiceTest {
         LottoTickets.add(lottoNumber_1);
         LottoTickets.add(lottoNumber_2);
 
-        LottoConsumer consumer = new LottoConsumer(0);
+        LottoConsumer consumer = new LottoConsumer();
         LottoCalculator calculator = new LottoCalculator();
         LottoGenerator generator = new LottoGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
