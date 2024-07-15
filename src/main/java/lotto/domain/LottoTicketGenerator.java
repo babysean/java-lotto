@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import static lotto.domain.LottoTicket.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoTicket.MIN_LOTTO_NUMBER;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,12 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicketGenerator {
-
-    /** 로또 숫자의 최솟값 */
-    public static final int MIN_LOTTO_NUMBER = 1;
-
-    /** 로또 숫자의 최댓값 */
-    public static final int MAX_LOTTO_NUMBER = 45;
 
     /**
      * 자동 로또 번호를 생성하고 반환합니다.

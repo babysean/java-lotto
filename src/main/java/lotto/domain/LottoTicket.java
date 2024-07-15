@@ -12,6 +12,12 @@ public class LottoTicket {
     /** 로또 가격 */
     public static final int LOTTO_PRICE = 1000;
 
+    /** 로또 숫자의 최솟값 */
+    public static final int MIN_LOTTO_NUMBER = 1;
+
+    /** 로또 숫자의 최댓값 */
+    public static final int MAX_LOTTO_NUMBER = 45;
+
     /** 로또 번호 */
     private final List<Integer> numbers;
 
