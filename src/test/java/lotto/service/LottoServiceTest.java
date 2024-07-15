@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoCalculator;
 import lotto.domain.LottoConsumer;
-import lotto.domain.LottoGenerator;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ class LottoServiceTest {
 
         LottoConsumer consumer = new LottoConsumer();
         LottoCalculator calculator = new LottoCalculator();
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
 
         // when
@@ -47,7 +47,7 @@ class LottoServiceTest {
 
         LottoConsumer consumer = new LottoConsumer();
         LottoCalculator calculator = new LottoCalculator();
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
 
         // when
@@ -65,7 +65,7 @@ class LottoServiceTest {
         String[] lottoNumber = {"1", "2", "3", "4", "5", "6"};
 
         LottoCalculator calculator = new LottoCalculator();
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
 
         // when
@@ -82,7 +82,7 @@ class LottoServiceTest {
         int bonusNumber = 24;
 
         LottoCalculator calculator = new LottoCalculator();
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
 
         LottoTicket winningTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -106,7 +106,7 @@ class LottoServiceTest {
     void 로또_수익률을_계산_합니다() {
         // given
         LottoCalculator calculator = new LottoCalculator();
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
 
         // when

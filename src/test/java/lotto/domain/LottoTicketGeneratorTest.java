@@ -5,13 +5,13 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoGeneratorTest {
+class LottoTicketGeneratorTest {
 
     @Test
     @DisplayName("로또_번호는_6개_입니다")
     void 로또_번호는_6개_입니다() {
         // given
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
 
         // when
         LottoTicket lottoTicket = generator.autoGenerate();
@@ -25,7 +25,7 @@ class LottoGeneratorTest {
     @DisplayName("로또_번호는_중복되지_않습니다")
     void 로또_번호는_중복되지_않습니다() {
         // given
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
 
         // when
         LottoTicket lottoTicket = generator.autoGenerate();

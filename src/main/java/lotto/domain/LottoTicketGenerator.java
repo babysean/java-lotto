@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoGenerator {
+public class LottoTicketGenerator {
 
     /** 로또 숫자의 최솟값 */
     public static final int MIN_LOTTO_NUMBER = 1;

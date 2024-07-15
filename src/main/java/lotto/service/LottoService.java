@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 import lotto.domain.LottoCalculator;
 import lotto.domain.LottoConsumer;
-import lotto.domain.LottoGenerator;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketGenerator;
 import lotto.view.OutputView;
 
 public class LottoService {
@@ -16,9 +16,9 @@ public class LottoService {
     private final LottoCalculator calculator;
 
     /** 로또 번호 생성기 */
-    private final LottoGenerator generator;
+    private final LottoTicketGenerator generator;
 
-    public LottoService(LottoCalculator calculator, LottoGenerator generator) {
+    public LottoService(LottoCalculator calculator, LottoTicketGenerator generator) {
         this.calculator = calculator;
         this.generator = generator;
     }

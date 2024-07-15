@@ -23,7 +23,7 @@ public class LottoConsumer {
      * @param money 구매할 금액
      */
     public void buyLotto(int money) {
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
 
         int purchasedCount = money / LOTTO_PRICE;
         int autoPurchasedCount = purchasedCount - manualLottoCount;
@@ -39,7 +39,7 @@ public class LottoConsumer {
      * @param lottoNumbers 수동 로또 티켓 목록
      */
     public void buyManualLotto(List<String[]> lottoNumbers) {
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
 
         for (String[] lottoNumber : lottoNumbers) {
             lottoTickets.add(generator.manualGenerate(lottoNumber));

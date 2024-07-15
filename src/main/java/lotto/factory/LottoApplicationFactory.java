@@ -2,7 +2,7 @@ package lotto.factory;
 
 import lotto.LottoApplication;
 import lotto.domain.LottoCalculator;
-import lotto.domain.LottoGenerator;
+import lotto.domain.LottoTicketGenerator;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,7 +19,7 @@ public class LottoApplicationFactory {
 
     private LottoService createLottoService() {
         LottoCalculator calculator = new LottoCalculator();
-        LottoGenerator generator = new LottoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
 
         return new LottoService(calculator, generator);
     }
