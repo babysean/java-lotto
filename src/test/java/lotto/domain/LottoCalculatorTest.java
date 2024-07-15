@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,10 +12,7 @@ class LottoCalculatorTest {
     @DisplayName("로또_티켓의_당첨_결과를_반환합니다")
     void 로또_티켓의_당첨_결과를_반환합니다() {
         // given
-        List<LottoPrize> result = new ArrayList<>();
-        result.add(LottoPrize.THREE_MATCHES);
-        result.add(LottoPrize.THREE_MATCHES);
-        result.add(LottoPrize.FIVE_MATCHES);
+        List<LottoPrize> result = List.of(LottoPrize.THREE_MATCHES, LottoPrize.THREE_MATCHES, LottoPrize.FIVE_MATCHES);
 
         // when
         LottoCalculator calculator = new LottoCalculator();
@@ -30,9 +26,7 @@ class LottoCalculatorTest {
     @DisplayName("당첨금을_계산하여_반환합니다")
     void 당첨금을_계산하여_반환합니다() {
         // given
-        List<LottoPrize> result = new ArrayList<>();
-        result.add(LottoPrize.THREE_MATCHES);
-        result.add(LottoPrize.FOUR_MATCHES);
+        List<LottoPrize> result = List.of(LottoPrize.THREE_MATCHES, LottoPrize.FOUR_MATCHES);
 
         // when
         LottoCalculator calculator = new LottoCalculator();
