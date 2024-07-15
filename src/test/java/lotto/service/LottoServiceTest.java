@@ -10,6 +10,9 @@ import lotto.domain.LottoConsumer;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketGenerator;
+import lotto.domain.purchaseStrategy.AutoStrategy;
+import lotto.domain.purchaseStrategy.ManualStrategy;
+import lotto.dto.LottoPurchaseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +28,11 @@ class LottoServiceTest {
         LottoCalculator calculator = new LottoCalculator();
         LottoTicketGenerator generator = new LottoTicketGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
+        LottoPurchaseDto purchaseDto = new LottoPurchaseDto(money, null);
+        lottoService.setPurchaseStrategy(new AutoStrategy());
 
         // when
-        lottoService.buyLotto(consumer, money);
+        lottoService.buyLottoTicket(consumer, purchaseDto);
 
         // then
         assertThat(consumer.getLottoTickets()
@@ -38,20 +43,24 @@ class LottoServiceTest {
     @DisplayName("수동_로또_티켓을_구매합니다")
     void 수동_로또_티켓을_구매합니다() {
         // given
-        String[] lottoNumber_1 = {"1", "2", "3", "4", "5", "6"};
-        String[] lottoNumber_2 = {"1", "2", "3", "4", "5", "6"};
+        int money = 2_000;
+
+        String[] lottoNumber1 = {"1", "2", "3", "4", "5", "6"};
+        String[] lottoNumber2 = {"1", "2", "3", "4", "5", "6"};
 
         List<String[]> LottoTickets = new ArrayList<>();
-        LottoTickets.add(lottoNumber_1);
-        LottoTickets.add(lottoNumber_2);
+        LottoTickets.add(lottoNumber1);
+        LottoTickets.add(lottoNumber2);
 
         LottoConsumer consumer = new LottoConsumer();
         LottoCalculator calculator = new LottoCalculator();
         LottoTicketGenerator generator = new LottoTicketGenerator();
         LottoService lottoService = new LottoService(calculator, generator);
+        LottoPurchaseDto purchaseDto = new LottoPurchaseDto(money, LottoTickets);
+        lottoService.setPurchaseStrategy(new ManualStrategy());
 
         // when
-        lottoService.buyManualLotto(consumer, LottoTickets);
+        lottoService.buyLottoTicket(consumer, purchaseDto);
 
         // then
         assertThat(consumer.getLottoTickets()

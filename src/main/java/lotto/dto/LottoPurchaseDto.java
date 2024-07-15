@@ -12,6 +12,7 @@ public class LottoPurchaseDto {
     public LottoPurchaseDto(int money, List<String[]> lottoNumbers) {
         this.money = money;
         this.lottoNumbers = new ArrayList<>();
+
         if (lottoNumbers != null) {
             this.lottoNumbers.addAll(lottoNumbers);
         }
